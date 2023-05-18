@@ -27,6 +27,6 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Build the docker image
-        run: docker build -t niebexcom .
+        run: docker build -t peerbox .
       - name: Start the docker container
-        run: docker run -dp 3000:3000 niebexcom
+        run: docker run -dp 3000:3000 peerbox
