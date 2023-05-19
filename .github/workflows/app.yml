@@ -1,0 +1,32 @@
+name: niebexcom
+
+on:
+  push:
+    branches: [staging]
+
+jobs:
+  Test:
+    if: true
+    runs-on: self-hosted
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install Nodejs
+        uses: actions/setup-node@v3
+        with:
+          node-version: "19.0"
+          cache: "npm"
+      - name: Install dependencies
+        run: npm ci
+      - name: Run build
+        run: npm run build
+      # - name: Run Application Tests
+      #   run: npm run test
+  Deploy:
+    needs: Test
+    runs-on: self-hosted
+    steps:
+      - name: Build the docker image
+        run: docker build -t peerbox .
+      - name: Start the docker container
+        run: docker run -dp 3000:3000 peerbox
