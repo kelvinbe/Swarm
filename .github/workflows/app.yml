@@ -29,4 +29,4 @@ jobs:
       - name: Build the docker image
         run: docker build -t peerbox .
       - name: Start the docker container
-        run: docker run -dp 3000:3000 peerbox
+        run: docker run -dp 3003:3000 peerbox
