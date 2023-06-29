@@ -9,3 +9,5 @@ const SwarmDetails = () =>{
         </View>
     )
 }
+
+export default SwarmDetails
