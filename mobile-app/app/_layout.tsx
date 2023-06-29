@@ -3,11 +3,12 @@ import { DarkTheme, DefaultTheme, ThemeProvider as NavigationThemeProvider } fro
 import { useFonts } from 'expo-font';
 import { SplashScreen, Stack } from 'expo-router';
 import { useEffect } from 'react';
-import { useColorScheme } from 'react-native';
+import { Platform, useColorScheme } from 'react-native';
 import { Provider } from 'react-redux';
 import store from '../store';
 import { ThemeProvider } from '@rneui/themed';
 import { darkTheme, lightTheme } from '../rn-elements';
+import { StatusBar } from 'expo-status-bar';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -35,6 +36,7 @@ export default function RootLayout() {
       {/* Keep the splash screen open until the assets have loaded. In the future, we should just support async font loading with a native version of font-display. */}
       {!loaded && <SplashScreen />}
       {loaded && <RootLayoutNav />}
+      <StatusBar style={Platform.OS==='ios'? 'light': 'auto'}/>
     </>
   );
 }

@@ -7,7 +7,6 @@ const LoginScreen = ()=>{
     return(
         <View>
             <Text style={{color: 'white'}}>Login Here</Text>
-            <StatusBar style={Platform.OS==='ios'? 'light': 'auto'}/>
         </View>
     )
 }
