@@ -1,9 +1,8 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Link, Tabs } from 'expo-router';
-import { Pressable, useColorScheme } from 'react-native';
-
-import Colors from '../../constants/Colors';
-import { Ionicons, Octicons } from '@expo/vector-icons';
+import { Tabs } from 'expo-router';
+import { useColorScheme } from 'react-native';
+import { Feather, Ionicons, Octicons } from '@expo/vector-icons';
+import { useTheme } from '@rneui/themed';
 
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
@@ -17,11 +16,12 @@ function TabBarIcon(props: {
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+  const {theme} = useTheme()
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+        tabBarActiveTintColor: theme.colors.tint,
       }}>
       <Tabs.Screen
         name="(home)"
@@ -48,6 +48,8 @@ export default function TabLayout() {
         name="(notifications)"
         options={{
           title: 'Notifications',
+          headerTitle:'Notifications',
+          headerTitleAlign: 'center',
           tabBarIcon: ({ color }) => <Ionicons name="notifications-outline" size={24} color={color} />,
         }}
       />
@@ -55,7 +57,9 @@ export default function TabLayout() {
         name="(profile)"
         options={{
           title: 'Profile',
-          tabBarIcon: ({ color }) => <TabBarIcon name="user" color={color} />,
+          headerTitle:'Profile',
+          headerTitleAlign: 'center',
+          tabBarIcon: ({ color }) => <Feather name="user" size={24} color={color} />,
         }}
       />
     </Tabs>

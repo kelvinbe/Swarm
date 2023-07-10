@@ -12,7 +12,7 @@ const Divider = (props: Props) => {
   return (
     <View style={styles.container}>
       <View style={styles.divider}></View>
-      {props.children && <Text>Or</Text>}
+      {props.children && <Text style={styles.textStyle}>Or</Text>}
       {props.children && <View style={styles.divider}></View>}
     </View>
   );
@@ -29,11 +29,11 @@ const useStyles = makeStyles((theme, props: Props) => ({
   },
   divider: {
     height: 1,
-    backgroundColor: props.backgroundColor? props?.backgroundColor : "#ADB5BD",
+    backgroundColor: props.backgroundColor? props?.backgroundColor : theme.colors.stroke,
     width: props.children ? "45%" : "100%",
   },
   textStyle: {
-    color: "#ADB5BD",
+    color: theme.colors.stroke,
     fontSize: 12
   }
 }));

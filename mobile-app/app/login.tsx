@@ -6,7 +6,7 @@ import { StatusBar } from 'expo-status-bar';
 const LoginScreen = ()=>{
     return(
         <View>
-            <Text style={{color: 'white'}}>Login Here</Text>
+            <Text style={{color: '#000'}}>Login Here</Text>
         </View>
     )
 }

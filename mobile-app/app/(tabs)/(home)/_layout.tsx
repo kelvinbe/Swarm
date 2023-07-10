@@ -10,7 +10,7 @@ export {ErrorBoundary} from "expo-router"
 const HomeLayout = ()=>{
     return(
         <Stack>
-            <Stack.Screen name="index" options={{ headerShown: false}} />
+            <Stack.Screen name="index" options={{ headerShown: false,}} />
             <Stack.Screen name="categories" options={{presentation: 'modal'}} />
             <Stack.Screen name="choose-category" options={{presentation: 'modal'}} />
             <Stack.Screen name="questions" options={{presentation: 'modal'}} />          
