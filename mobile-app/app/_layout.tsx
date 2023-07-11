@@ -17,7 +17,7 @@ export {
 
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: '(tabs)',
+  initialRouteName: 'login',
 };
 
 export default function RootLayout() {
@@ -59,6 +59,7 @@ function RootLayoutNav() {
             <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal', }} />         
             <Stack.Screen name="register" options={{presentation: "modal", title: 'Register',}} />
             <Stack.Screen name="password" options={{presentation: "modal", title: 'Password',}} />
+            <Stack.Screen name='welcome' options={{presentation: 'modal', }}/>
           </Stack>
         </NavigationThemeProvider>
       </ThemeProvider>

@@ -7,9 +7,15 @@ import SearchAndFilter from "../../../components/Molecules/Topics/SearchAndFilte
 import FilterCard from "../../../components/Molecules/Cards/FilterCard";
 import { BottomSheet } from "@rneui/base";
 import { useState } from "react";
+import IconButton from "../../../components/Atoms/Buttons/IconButton";
+import ActionButton from "../../../components/Atoms/Buttons/ActionButton";
+import { Link } from "expo-router";
+import TopicList from "./topic-list";
+
 
 const Topics = () => {
-  const [isVisible, setIsVisible] = useState<boolean>(false)
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [search, setSearch] = useState<string>('')
   const handleCategoryFilter = () => {};
   const handlePopularityFilter = () => {};
   const handleRecencyFilter = () => {};
@@ -24,36 +30,20 @@ const Topics = () => {
   const onBackdropPress=()=>{
     setIsVisible(false)
   }
+  const handleCreateSwarm=()=>{
 
+  }
+  const handleTopicSelect=()=>{
+
+  }
   return (
     <ScrollView style={{ padding: 15, backgroundColor: "#fff" }}>
       <View style={{ paddingBottom: 20 }}>
-        {/* <Text>Topics</Text> */}
-        {/* <AvailableTopics /> */}
-        {/* <SelectableTopicCard
-        title="Sports and Entertainment"
-        content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat fuga
-          architecto voluptates ex culpa omnis ratione, reiciendis quo harum
-          provident libero iusto commodi? Molestiae, amet deserunt. Deleniti at
-          delectus commodi?"
-        onTopicSelect={() => null}
-        selected
-      /> */}
-        {/* <TopicCard
-        title="Data Privacy and security"
-        summary="Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat fuga
-        architecto voluptates ex culpa omnis ratione,"
-        comments={78}
-        views={"367k"}
-        supporters={"57k"}
-        duration="6 Days"
-        imageUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMSAPGnkMMjJ36VHbe-DEabD5uufODlKCZ9A&usqp=CAU"
-        onSeeCommentsPress={()=>null}
-        onSupportersPress={()=>null}
-        updateTopicStats={()=>null}
-      /> */}
-
-        <SearchAndFilter filterVisible searchVisible setIsVisible={setIsVisible}/>
+      <View style={{display: 'flex', flexDirection:'row', justifyContent: 'flex-end', paddingBottom: 20}}>
+        <IconButton name="add" onPress={handleCreateSwarm} title="Create Swarm"/>
+      </View>
+        
+        <SearchAndFilter filterVisible searchVisible setIsVisible={setIsVisible} setSearch={setSearch}/>
         <TopicSummaryList />
         <BottomSheet isVisible={isVisible} onBackdropPress={onBackdropPress}>
           <FilterCard

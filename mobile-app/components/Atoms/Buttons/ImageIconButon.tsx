@@ -1,23 +1,22 @@
-import { Text,Image, View, ImageSourcePropType } from "react-native";
-import { Button, makeStyles } from "@rneui/themed";
+import { Text, View, } from "react-native";
+import { Button, makeStyles, useTheme } from "@rneui/themed";
+import { FontAwesome5 } from '@expo/vector-icons';
 
 interface Props {
-    image: ImageSourcePropType;
     title: string;
+    name: string;
     width?: number | string;
     onPress: ()=>void;
 }
 
 const ImageIconButton = (props: Props) => {
-  const {image, title, onPress} =props
+  const {title,name, onPress} =props
   const styles = useStyles(props);
+  const {theme} = useTheme()
   return (
     <Button buttonStyle={styles.buttonStyles} onPress={onPress} containerStyle={styles.containerStyle}>
       <View style={styles.imageViewStyles}>
-        <Image
-        style={styles.imageStyles}
-        source={image}
-        />
+        <FontAwesome5 name={name} size={18} color={theme.colors.text} />
       </View>
       <View style={styles.textViewStyles}>
         <Text style={styles.textStyles}>{title}</Text>
@@ -50,14 +49,14 @@ const useStyles = makeStyles((theme, props:Props) => ({
     width: "100%",
   },
   imageStyles: {
-    width: 20,
-    height: 20,
+    width: 15,
+    height: 15,
   }, 
   imageViewStyles: {
     borderWidth: 1, 
     borderColor: "#E5E5E5", 
     borderRadius:12,
-    padding: 12,
+    padding: 10,
   }, 
   containerStyle: {
     borderRadius: 8,
