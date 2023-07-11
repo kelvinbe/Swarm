@@ -11,6 +11,8 @@ const TopicsLayout = ()=>{
         <Stack>
             <Stack.Screen name="index" options={{ headerShown: false}} />
             <Stack.Screen name="choose-topic" options={{presentation: 'modal'}} />
+            <Stack.Screen name="questions" options={{presentation: 'modal'}}/>
+            <Stack.Screen name="select-topic" options={{presentation: 'modal'}}/>
         </Stack>
     )
 }

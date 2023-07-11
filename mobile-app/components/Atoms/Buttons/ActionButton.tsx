@@ -1,7 +1,7 @@
 import React from "react";
-import {View} from "react-native";
-import {Button, ButtonProps} from "@rneui/base";
-import { makeStyles } from "@rneui/themed";
+import { View } from "react-native";
+import { Button, ButtonProps } from "@rneui/base";
+import { makeStyles, useTheme, } from "@rneui/themed";
 
 interface Props {
   children?: string;
@@ -9,36 +9,44 @@ interface Props {
   disabled?: boolean;
   loading?: boolean;
   width?: number | string;
+  backgroundColor?: string;
+  color?: string;
+  onPress?: () => void;
 }
 
-const ActionButton = (props: Props & ButtonProps)=>{
-    const {loading, children, disabled, onPress} = props
+const ActionButton = (props: Props & ButtonProps) => {
+  const { loading, children, disabled, onPress, color } = props;
+  const styles = useStyles(props);
+  const {theme} = useTheme()
+  return (  
+      <View style={styles.containerStyle}>
+        <Button
+          buttonStyle={styles.buttonStyle}
+          title={children}
+          disabled={disabled}
+          loading={loading}
+          onPress={onPress}
+          titleStyle={{ color: color ? color : theme.colors.white }}
+        />
+      </View>
+    );
+};
 
-    const styles = useStyles(props)
-    return(
-        <View style={styles.containerStyle}>
-            <Button 
-              buttonStyle={styles.buttonStyle}
-              title={children}
-              disabled={disabled}
-              loading={loading} 
-              onPress={onPress}
-            />
-        </View>
-    )
-}
+export default ActionButton;
 
-export default ActionButton 
-
-const useStyles = makeStyles((theme, props:Props)=>({
-    buttonStyle: {
-        borderRadius: 10, 
-        height: 50, 
-        backgroundColor: '#006773',
-        width: props.fullWidth ? '100%' : props.width ? props?.width: 350,
-    },
-    containerStyle: {
-        width: props?.fullWidth ? '100%' : props?.width ? props?.width  : 'auto',
-        elevation: 0,
-    }
-}))
+const useStyles = makeStyles((theme, props: Props) => ({
+  buttonStyle: {
+    borderRadius: 10,
+    height: 50,
+    backgroundColor: props.disabled
+      ? theme.colors.disabled
+      : props.backgroundColor
+      ? props?.backgroundColor
+      : theme.colors.primary,
+    width: props.fullWidth ? "100%" : props.width ? props?.width : 300,
+  },
+  containerStyle: {
+    width: props?.fullWidth ? "100%" : props?.width ? props?.width : "auto",
+    elevation: 0,
+  },
+}));
