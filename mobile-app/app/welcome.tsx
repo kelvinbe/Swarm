@@ -32,11 +32,10 @@ const Welcome = () => {
   const { theme } = useTheme();
   const {push}=useRouter()
   const handleContinue=()=>{
-    push('/')
+    
   }
   return (
     <ScrollView style={styles.container}>
-      <Logo width={60} height={60}/>
       <View style={styles.headerContainer}>
         <Text
           style={[
@@ -73,8 +72,7 @@ const Welcome = () => {
         </View>
       </View>
       <View style={styles.buttons}>
-        <Link href={'/home'} asChild></Link>
-        <ActionButton fullWidth children={"Continue"}  />
+        <ActionButton fullWidth children={"Continue"} onPress={handleContinue} />
       </View>
     </ScrollView>
   );

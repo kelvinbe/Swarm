@@ -1,19 +1,12 @@
 import { Stack } from "expo-router"; 
 
-export const unstable_settings = {
-    // Ensure any route can link back to `/`
-    initialRouteName: "index",
-  };
-
 export {ErrorBoundary} from "expo-router"
 
 const HomeLayout = ()=>{
     return(
-        <Stack>
+        <Stack initialRouteName="index">
             <Stack.Screen name="index" options={{ headerShown: false,}} />
-            <Stack.Screen name="categories" options={{presentation: 'modal', title: 'Choose Category'}} />
-            <Stack.Screen name="choose-category" options={{presentation: 'modal'}} />
-                     
+            <Stack.Screen name="categories" options={{ title: 'Choose Category'}} />                  
         </Stack>
     )
 }

@@ -1,13 +1,14 @@
-import { View, Text } from "react-native"; 
+import { useTheme } from "@rneui/themed";
+import { View, Text, ScrollView } from "react-native"; 
+import SwarmDetailsComponent from "../../../components/Organisims/Swarms/SwarmDetailsComponent";
 
 const SwarmDetails = () =>{
-    return(
-        <View>
-            <Text>
-                Swarm Details
-            </Text>
-        </View>
-    )
+    const {theme} = useTheme()
+  return (
+    <ScrollView style={{ paddingHorizontal: 15, backgroundColor: theme.colors.background}}>
+      <SwarmDetailsComponent />
+    </ScrollView>
+  );
 }
 
 export default SwarmDetails

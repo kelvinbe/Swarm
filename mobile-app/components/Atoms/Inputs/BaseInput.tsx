@@ -28,7 +28,6 @@ const useStyles = makeStyles((theme, props: Props) => {
     },
     inputStyle: {
       borderWidth: 0,
-      paddingVertical: 10,
       paddingHorizontal: 20,
       paddingLeft: 10,
       margin: 0,
@@ -55,11 +54,9 @@ const useStyles = makeStyles((theme, props: Props) => {
       width: props?.fullWidth ? '100%' : props?.width ? props.width : 'auto',
     },
     labelStyle: {
-      marginTop: -26,
       color: theme.colors.text,
       width: '100%',
       fontWeight: '700',
-      fontFamily: 'Lato_700Bold',
       fontSize: 16,
     },
   };

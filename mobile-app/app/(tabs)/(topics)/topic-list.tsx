@@ -41,9 +41,6 @@ const summaries = [
   ];
 const TopicList = ()=>{
 
-    const handleSeeComments=()=>{
-
-    }
     const handleViewSupporters=()=>{
 
     }
@@ -62,7 +59,6 @@ const TopicList = ()=>{
                       comments={item.comments} 
                       views={item.views} 
                       supporters={item.supporters}
-                      onSeeCommentsPress={handleSeeComments}
                       onSupportersPress={handleViewSupporters}
                       updateTopicStats={updateTopicStats}
                       duration={item.duration}

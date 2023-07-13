@@ -1,6 +1,6 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Tabs } from 'expo-router';
-import { useColorScheme } from 'react-native';
+import { View, useColorScheme } from 'react-native';
 import { Feather, Ionicons, Octicons } from '@expo/vector-icons';
 import { useTheme } from '@rneui/themed';
 
@@ -22,11 +22,15 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: theme.colors.tint,
-      }}>
+      }}
+      initialRouteName='(home)'
+    >
       <Tabs.Screen
         name="(home)"
         options={{
           title: 'Home',
+          headerTitle: 'Home',
+          headerTitleAlign: 'center',
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
         }}
       />

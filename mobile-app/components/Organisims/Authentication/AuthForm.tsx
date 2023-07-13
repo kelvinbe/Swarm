@@ -4,39 +4,54 @@ import ActionButton from '../../Atoms/Buttons/ActionButton';
 import Divider from '../../Atoms/Divider/Divider';
 import { makeStyles, useTheme } from '@rneui/themed';
 import ImageIconButton from '../../Atoms/Buttons/ImageIconButon';
-import { Link } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
+import { isValidEmail } from '../../../utils';
 
-const Login = () => {
+interface IProps{
+  state?: 'signup' | 'login'
+}
+const AuthForm = (props: IProps) => {
   const [email, setEmail] = React.useState('');
-  const {theme} = useTheme()
+  const {theme} = useTheme();
+  const {state} = props
   const styles = useStyles()
+  const {push} = useRouter()
   const onContinueClick = ()=>{
-    alert('Continue')
+    if(isValidEmail(email)){
+      push('password')
+    }else{
+      /**
+       * @todo implement invalid email notification
+       */
+    }
   }
 
   const onGoogleLogin = ()=>{
-    alert('Login with Google')
     /**
      * @todo Implement login with google
      */
 }
 const onMicrosoftLogin = ()=>{
-    alert('Login with Microsoft')
     /**
      * @todo Implement login with google
      */
 }
 const onFacebookLogin = ()=>{
-    alert('Login with Facebook')
     /**
      * @todo Implement login with google
      */
 }
 const onAppleLogin = ()=>{
-    alert('Login with Apple')
     /**
      * @todo Implement login with google
      */
+}
+const navigateAuth = ()=>{
+  if(state==='signup'){
+      push('login')
+  }else{
+      push('register')
+  }
 }
 
   return (
@@ -48,7 +63,17 @@ const onAppleLogin = ()=>{
         </View>
         <View>
             <ActionButton onPress={onContinueClick} fullWidth>Continue</ActionButton>
-            <Text style={styles.textStyles}>Don't Have an Account? <Link href={'/register'} style={{color:theme.colors.primary}}>Sign Up</Link></Text>
+            {state === "signup" ? (
+          <Text style={{ color: theme.colors.grey2, textAlign: "center" }}>
+            Already have an account?
+            <Text style={{ color: theme.colors.primary }} onPress={navigateAuth}> Log In</Text>
+          </Text>
+        ) : (
+          <Text style={{ color: theme.colors.grey2, textAlign: "center" }}>
+            Don't have an account?
+            <Text style={{ color: theme.colors.primary }} onPress={navigateAuth}> Sign Up</Text>
+          </Text>
+        )}
         </View>
       </View>
       <View style={styles.divider}>
@@ -65,7 +90,7 @@ const onAppleLogin = ()=>{
   )
 }
 
-export default Login
+export default AuthForm
 
 const useStyles=makeStyles((theme, props)=>({
   container: {

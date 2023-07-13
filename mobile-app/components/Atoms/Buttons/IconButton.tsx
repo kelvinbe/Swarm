@@ -9,6 +9,7 @@ interface Props {
   iconType?: string;
   width?: string | number;
   disabled?: boolean;
+  height?: number;
   onPress: () => void;
 }
 const IconButton = (props: Props) => {
@@ -43,7 +44,7 @@ const useStyles = makeStyles((theme, props: Props) => ({
       : theme.colors.primary,
     borderRadius: 8,
     width: props.width ? props?.width : 175,
-    height: 45,
+    height: props.height ?? 45,
   },
   titleStyle: {
     color: props.color ? props.color : theme.colors.white,

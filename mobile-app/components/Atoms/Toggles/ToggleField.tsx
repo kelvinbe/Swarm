@@ -55,6 +55,6 @@ const useStyles = makeStyles((theme, props: Props)=>({
     textStyles:{
         color: props.color? props?.color: 'gray',
         fontSize: props.fontSize? props?.fontSize: 14,
-        fontWeight: props.bold? '500': '400',
+        fontWeight: props.bold? '600': '400',
     }
 }))

@@ -11,40 +11,56 @@ import IconButton from "../../../components/Atoms/Buttons/IconButton";
 import ActionButton from "../../../components/Atoms/Buttons/ActionButton";
 import { Link } from "expo-router";
 import TopicList from "./topic-list";
+import { useTheme } from "@rneui/themed";
 
 
 const Topics = () => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
-  const [search, setSearch] = useState<string>('')
+  const [search, setSearch] = useState<string>("");
+  const {theme} = useTheme()
   const handleCategoryFilter = () => {};
   const handlePopularityFilter = () => {};
   const handleRecencyFilter = () => {};
   const handleTopicsFilter = () => {};
   const handleSwarmLevelFilter = () => {};
   const onFilterApply = () => {
-    setIsVisible(false)
+    setIsVisible(false);
     /**
      * @todo implement other logic here
      */
   };
-  const onBackdropPress=()=>{
-    setIsVisible(false)
-  }
-  const handleCreateSwarm=()=>{
-
-  }
-  const handleTopicSelect=()=>{
-
-  }
+  const onBackdropPress = () => {
+    setIsVisible(false);
+  };
+  const handleJoinTap = () => {};
+  const onContinueTap = () => {};
   return (
-    <ScrollView style={{ padding: 15, backgroundColor: "#fff" }}>
+    <ScrollView style={{ padding: 15, backgroundColor: theme.colors.background }}>
       <View style={{ paddingBottom: 20 }}>
-      <View style={{display: 'flex', flexDirection:'row', justifyContent: 'flex-end', paddingBottom: 20}}>
-        <IconButton name="add" onPress={handleCreateSwarm} title="Create Swarm"/>
-      </View>
-        
-        <SearchAndFilter filterVisible searchVisible setIsVisible={setIsVisible} setSearch={setSearch}/>
-        <TopicSummaryList />
+        <SearchAndFilter
+          searchVisible
+          filterVisible
+          setSearch={setSearch}
+          setIsVisible={setIsVisible}
+        />
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "flex-end",
+            paddingVertical: 20,
+          }}
+        >
+          <IconButton name="add" onPress={handleJoinTap} title="Join" />
+        </View>
+        <View>
+          <AvailableTopics />
+        </View>
+        <View style={{ paddingTop: 40 }}>
+          <ActionButton onPress={onContinueTap} fullWidth>
+            Continue
+          </ActionButton>
+        </View>
         <BottomSheet isVisible={isVisible} onBackdropPress={onBackdropPress}>
           <FilterCard
             handleCategoryFilter={handleCategoryFilter}

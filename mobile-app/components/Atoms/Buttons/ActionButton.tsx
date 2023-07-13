@@ -11,6 +11,7 @@ interface Props {
   width?: number | string;
   backgroundColor?: string;
   color?: string;
+  height?: number;
   onPress?: () => void;
 }
 
@@ -37,7 +38,7 @@ export default ActionButton;
 const useStyles = makeStyles((theme, props: Props) => ({
   buttonStyle: {
     borderRadius: 10,
-    height: 50,
+    height:props.height ?? 45,
     backgroundColor: props.disabled
       ? theme.colors.disabled
       : props.backgroundColor

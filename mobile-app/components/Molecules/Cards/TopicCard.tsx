@@ -4,6 +4,8 @@ import SocialInteraction from "../Social/SocialInteraction";
 import { Feather } from "@expo/vector-icons";
 import ImageCard from "../../Atoms/Images/ImageCard";
 import TopicTitle from "../../Atoms/IconCards/TopicTitle";
+import Comment from "../Topics/Comment";
+import { useState } from "react";
 
 interface IProps {
   title: string;
@@ -13,7 +15,6 @@ interface IProps {
   views: number | string;
   imageUrl: string;
   duration: string;
-  onSeeCommentsPress: () => void;
   updateTopicStats: () => void;
   onSupportersPress: () => void;
 }
@@ -27,11 +28,11 @@ const TopicCard = (props: IProps) => {
     imageUrl,
     duration,
     updateTopicStats,
-    onSeeCommentsPress,
     onSupportersPress,
   } = props;
   const styles = useStyles();
   const {theme} = useTheme();
+  const [showComments, setShowComments] = useState<boolean>(false)
 
   const onReactPress = () => {
     updateTopicStats();
@@ -51,6 +52,10 @@ const TopicCard = (props: IProps) => {
      * @todo implement logic
      */
   };
+
+  const onSeeCommentsPress=()=>{
+    setShowComments(!showComments)
+  }
   return (
     <View>
       <View style={{gap: 3, paddingVertical: 10,}}>
@@ -91,7 +96,9 @@ const TopicCard = (props: IProps) => {
               </Text>
             </View>
           </TouchableOpacity>
-
+          <View>
+            
+          </View>
           <TouchableOpacity onPress={onSupportersPress}>
             <View style={styles.supporters}>
               <Feather name="users" size={17} color={theme.colors.text} />

@@ -1,12 +1,46 @@
-import { Text, ScrollView } from "react-native";
-import SwarmDetailsCard from "../../../components/Molecules/Cards/SwarmDetailsCard";
-import SwarmDetailsComponent from "../../../components/Organisims/Swarms/SwarmDetailsComponent";
+import { Text, ScrollView, View } from "react-native";
+import { useTheme } from "@rneui/themed";
+import SwarmList from "../../../components/Organisims/Swarms/SwarmList";
+import SearchAndFilter from "../../../components/Molecules/Topics/SearchAndFilter";
+import { useState } from "react";
+import { BottomSheet } from "@rneui/base";
+import FilterCard from "../../../components/Molecules/Cards/FilterCard";
 
 const Swarms = () => {
+  const {theme} = useTheme();
+  const [search, setSearch] = useState<string>('');
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+
+  const handleCategoryFilter = () => {};
+  const handlePopularityFilter = () => {};
+  const handleRecencyFilter = () => {};
+  const handleTopicsFilter = () => {};
+  const handleSwarmLevelFilter = () => {};
+  const onFilterApply = () => {
+    setIsVisible(false)
+    /**
+     * @todo implement other logic here
+     */
+  };
+  const onBackdropPress=()=>{
+    setIsVisible(false)
+  }
   return (
-    <ScrollView style={{ paddingHorizontal: 15, }}>
-      <Text>Swarms</Text>
-      <SwarmDetailsComponent />
+    <ScrollView style={{ paddingHorizontal: 15,backgroundColor: theme.colors.background}}>
+      <View style={{gap: 10, }}>
+        <SearchAndFilter searchVisible filterVisible setSearch={setSearch} setIsVisible={setIsVisible}/>
+        <SwarmList />
+      </View>
+      <BottomSheet isVisible={isVisible} onBackdropPress={onBackdropPress}>
+        <FilterCard
+              handleCategoryFilter={handleCategoryFilter}
+              handlePopularityFilter={handlePopularityFilter}
+              handleRecencyFilter={handleRecencyFilter}
+              handleTopicsFilter={handleTopicsFilter}
+              handleSwarmLevelFilter={handleSwarmLevelFilter}
+              onDonePress={onFilterApply}
+            />
+        </BottomSheet>
     </ScrollView>
   );
 };

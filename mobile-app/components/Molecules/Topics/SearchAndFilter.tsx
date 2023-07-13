@@ -32,7 +32,7 @@ const SearchAndFilter = (props: IProps) => {
         <TouchableOpacity onPress={onFilterTap}>
           <View>
             <Ionicons
-              name="filter-sharp"
+              name="filter-outline"
               color={theme.colors.text}
               size={30}
             />

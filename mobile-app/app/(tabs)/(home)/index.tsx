@@ -1,24 +1,55 @@
-import { View, Text, ScrollView, FlatList } from "react-native";
-import ActionButton from "../../../components/Atoms/Buttons/ActionButton";
-import BaseInput from "../../../components/Atoms/Inputs/BaseInput";
-import ImageIconButton from "../../../components/Atoms/Buttons/ImageIconButon";
-import Divider from "../../../components/Atoms/Divider/Divider";
+import { View, ScrollView, } from "react-native";
+import { Link, useRouter } from "expo-router";
+import { useTheme } from "@rneui/themed";
 import IconButton from "../../../components/Atoms/Buttons/IconButton";
-import InputWithIcon from "../../../components/Atoms/Inputs/InputWithIcon";
-import TextArea from "../../../components/Atoms/Inputs/TextArea";
-import ToggleField from "../../../components/Atoms/Toggles/ToggleField";
-import SummaryCard from "../../../components/Molecules/Cards/SummaryCard";
-import CategoryIconCard from "../../../components/Atoms/IconCards/CategoryIconCard";
-import AvatarWithText from "../../../components/Atoms/IconCards/AvatarWithText";
-import Login from "../../../components/Organisims/Authentication/Login";
-import Logo from "../../../components/Atoms/Brand/Logo";
-import { Link } from "expo-router";
+import SearchAndFilter from "../../../components/Molecules/Topics/SearchAndFilter";
+import { BottomSheet } from "@rneui/base";
+import TopicSummaryList from "../../../components/Organisims/Topics/TopicSummaryList";
+import FilterCard from "../../../components/Molecules/Cards/FilterCard";
+import { useState } from "react";
 
 const HomeView = () => {
+  const {theme} = useTheme()
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [search, setSearch] = useState<string>('')
+
+  const {push} = useRouter()
+  const handleCategoryFilter = () => {};
+  const handlePopularityFilter = () => {};
+  const handleRecencyFilter = () => {};
+  const handleTopicsFilter = () => {};
+  const handleSwarmLevelFilter = () => {};
+  const onFilterApply = () => {
+    setIsVisible(false)
+    /**
+     * @todo implement other logic here
+     */
+  };
+  const onBackdropPress=()=>{
+    setIsVisible(false)
+  }
+  const handleCreateSwarm=()=>{
+    
+  }
   return (
-    <ScrollView>
-      <View style={{ padding: 10, gap: 4 }}>
-        {/* <Link href={"/categories"}>Link here</Link> */}
+    <ScrollView style={{backgroundColor: theme.colors.background, padding: 15}}>
+      <View style={{ paddingBottom: 20 }}>
+      <View style={{display: 'flex', flexDirection:'row', justifyContent: 'flex-end', paddingBottom: 20}}>
+        <IconButton name="add" onPress={handleCreateSwarm} title="Create Swarm"/> 
+      </View>
+        
+        <SearchAndFilter filterVisible searchVisible setIsVisible={setIsVisible} setSearch={setSearch}/>
+        <TopicSummaryList />
+        <BottomSheet isVisible={isVisible} onBackdropPress={onBackdropPress}>
+          <FilterCard
+            handleCategoryFilter={handleCategoryFilter}
+            handlePopularityFilter={handlePopularityFilter}
+            handleRecencyFilter={handleRecencyFilter}
+            handleTopicsFilter={handleTopicsFilter}
+            handleSwarmLevelFilter={handleSwarmLevelFilter}
+            onDonePress={onFilterApply}
+          />
+        </BottomSheet>
       </View>
     </ScrollView>
   );
