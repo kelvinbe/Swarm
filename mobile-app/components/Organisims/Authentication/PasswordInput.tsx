@@ -275,16 +275,15 @@ export default PasswordInput;
 
 const useStyles = makeStyles((theme)=>({
     bottomHelperTextContainer: {
-        width: "100%",
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "flex-end",
-        borderWidth: 1, 
-        marginVertical: 10, 
-        borderRadius: 8, 
-        paddingVertical: 5, 
-        gap: 5, 
-        borderColor: theme.colors.stroke1
+      width: "100%",
+      flexDirection: "column",
+      alignItems: "center",
+      borderWidth: 1, 
+      marginVertical: 10, 
+      borderRadius: 8, 
+      padding: 5, 
+      gap: 5, 
+      borderColor: theme.colors.stroke1
     },
     bottomHelperTextContainerA: {
         width: "100%",
