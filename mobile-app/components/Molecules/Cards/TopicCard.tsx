@@ -96,9 +96,6 @@ const TopicCard = (props: IProps) => {
               </Text>
             </View>
           </TouchableOpacity>
-          <View>
-            
-          </View>
           <TouchableOpacity onPress={onSupportersPress}>
             <View style={styles.supporters}>
               <Feather name="users" size={17} color={theme.colors.text} />

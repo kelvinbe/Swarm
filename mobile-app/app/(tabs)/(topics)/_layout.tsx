@@ -1,9 +1,8 @@
 import { Stack } from "expo-router"; 
 
-export {ErrorBoundary} from "expo-router"
 const TopicsLayout = ()=>{
     return(
-        <Stack initialRouteName="index">
+        <Stack>
             <Stack.Screen name="index" options={{ headerShown: false}} />
             <Stack.Screen name="choose-topic" options={{}} />
             <Stack.Screen name="questions" options={{}}/>

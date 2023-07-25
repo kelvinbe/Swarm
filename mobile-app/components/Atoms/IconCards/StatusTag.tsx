@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme, props: IProps) => ({
     borderWidth: 1,
     borderColor: props.status==='Completed'? '#38B000': props.status==='Cancelled'? '#BF0603': props.status==='In Progress' ? '#1877F2': '',
     backgroundColor: props.status==='Completed'? '#38B0001A': props.status==='Cancelled'? '#BF06031A': props.status==='In Progress' ? '#1877F21A': '',
-    paddingHorizontal: 5,
+    padding: 5,
     borderRadius: 50,
     width: 110,
   },

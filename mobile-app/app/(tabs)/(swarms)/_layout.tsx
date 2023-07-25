@@ -1,9 +1,8 @@
 import { Stack } from "expo-router"; 
 
-export {ErrorBoundary} from "expo-router"
 const SwarmsLayout = ()=>{
     return(
-        <Stack initialRouteName="index">
+        <Stack>
             <Stack.Screen name="index" options={{ headerShown: false}} />
             <Stack.Screen name="create-swarm" options={{presentation: 'modal'}} />
             <Stack.Screen name="swarm-details" options={{}} />

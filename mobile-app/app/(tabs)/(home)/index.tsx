@@ -29,7 +29,7 @@ const HomeView = () => {
     setIsVisible(false)
   }
   const handleCreateSwarm=()=>{
-    
+    push('/categories')
   }
   return (
     <ScrollView style={{backgroundColor: theme.colors.background, padding: 15}}>

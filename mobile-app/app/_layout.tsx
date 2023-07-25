@@ -20,11 +20,11 @@ export {
   ErrorBoundary,
 } from "expo-router";
 
-// export const unstable_settings = {
-//   // Ensure that reloading on `/modal` keeps a back button present.
-//   initialRouteName: "(tabs)/(swarms)",
-// };
-
+export const unstable_settings = {
+  // Ensure that reloading on `/modal` keeps a back button present.
+  initialRouteName: "(tabs)",
+};
+SplashScreen.preventAutoHideAsync()
 export default function RootLayout() {
   const [loaded, error] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
@@ -36,10 +36,14 @@ export default function RootLayout() {
     if (error) throw error;
   }, [error]);
 
+  useEffect(()=>{
+    if(loaded){
+      SplashScreen.hideAsync()
+    }
+  }, [loaded])
   return (
     <>
       {/* Keep the splash screen open until the assets have loaded. In the future, we should just support async font loading with a native version of font-display. */}
-      {!loaded && <SplashScreen />}
       {loaded && <RootLayoutNav />}
       <StatusBar style={Platform.OS === "ios" ? "light" : "auto"} />
     </>
@@ -56,7 +60,7 @@ function RootLayoutNav() {
           <NavigationThemeProvider
             value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
           >
-            <Stack initialRouteName="(tabs)">
+            <Stack>
               <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
               <Stack.Screen
                 name="login"

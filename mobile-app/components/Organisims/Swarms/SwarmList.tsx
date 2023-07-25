@@ -51,7 +51,7 @@ const SwarmList = () => {
       {swarms.map((item, index) => (
         <TouchableOpacity key={index} onPress={handleSwarmTap}>
           <View style={styles.swarmStyles}>
-            <Text style={{ color: theme.colors.text }}>{item.title}</Text>
+            <Text style={{ color: theme.colors.text, fontWeight:'700' }}>{item.title}</Text>
             <StatusTag status={item.status}/>
           </View>
         </TouchableOpacity>
