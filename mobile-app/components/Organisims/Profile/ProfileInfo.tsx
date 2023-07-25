@@ -8,34 +8,34 @@ import { Icon, Button } from "@rneui/base";
 const primaryLinks = [
   {
     tittle: "Achievements",
-    link: "../../../app/login",
+    link: "/login",
   },
   {
     tittle: "History And Statistics",
-    link: "../../../app/login",
+    link: "/login",
   },
   {
     tittle: "Accounts and Login",
-    link: "../../../app/login",
+    link: "/login",
   },
   {
     tittle: "Settings",
-    link: "../../../app/login",
+    link: "/login",
   },
 ];
 
 const secondaryLinks = [
   {
     tittle: "Privacy And Security",
-    link: "../../../app/login",
+    link: "/login",
   },
   {
     tittle: "Support",
-    link: "../../../app/login",
+    link: "/login",
   },
   {
     tittle: "About",
-    link: "../../../app/login",
+    link: "/login",
   },
 ];
 const ProfileInfo = () => {

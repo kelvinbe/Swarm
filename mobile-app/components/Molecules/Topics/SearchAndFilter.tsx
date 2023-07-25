@@ -20,7 +20,7 @@ const SearchAndFilter = (props: IProps) => {
   return (
     <View style={styles.container}>
       {searchVisible && (
-        <View style={{ width: !filterVisible ? "100%" : 250 }}>
+        <View style={{ width: !filterVisible ? "100%" : 300 }}>
           <InputWithIcon
             name="search"
             onChangeText={setSearch}
@@ -30,7 +30,7 @@ const SearchAndFilter = (props: IProps) => {
       )}
       {filterVisible && (
         <TouchableOpacity onPress={onFilterTap}>
-          <View>
+          <View style={{padding: 8, borderRadius: 8}}>
             <Ionicons
               name="filter-outline"
               color={theme.colors.text}

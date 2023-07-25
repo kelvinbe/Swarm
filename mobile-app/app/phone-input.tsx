@@ -25,7 +25,7 @@ const Phone = ()=>{
         <Text style={styles.textStyles}>Enter Your Phone Number</Text>
       </View>
       <View style={{ gap: 20 }}>
-        <View style={{}}>
+        <View>
           <PhoneInput
             ref={phoneInput}
             defaultValue={value}

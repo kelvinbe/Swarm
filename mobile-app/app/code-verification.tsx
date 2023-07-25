@@ -38,7 +38,7 @@ const CodeInput = (props: CodeInputProps) => {
         <Text style={{ color: theme.colors.text, fontWeight: "600" }}>
           Please enter the code we just sent you.
         </Text>
-        <View style={{}}>
+        <View>
           <BaseInput
             keyboardType="numeric"
             onChangeText={(value) => setCode(Number(value))}
