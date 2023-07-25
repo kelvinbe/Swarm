@@ -83,30 +83,14 @@ const WithHelperText = (props: Props) => {
         {({theme})=>(
             <View style={[styles.container, props.container]} >
                 <Input
-                secureTextEntry={props.secureTextEntry}
                 inputContainerStyle={styles.inputContainerStyle}
                 style={styles.style}
                 errorStyle={styles.errorStyle}
-                containerStyle={[styles.containerStyle, props.containerStyle]}
-                placeholder={props.placeholder} 
-                value={props.value} 
-                defaultValue={props.defaultValue} 
+                containerStyle={[styles.containerStyle, props.containerStyle]}  
                 inputStyle={[styles.inputStyle, props.inputStyle]} 
                 placeholderTextColor={theme.colors.grey3}  
-                onChangeText={props.onChangeText} 
-                onBlur={props.onBlur} 
-                onFocus={props.onFocus} 
-                clearTextOnFocus={props.clearTextOnFocus} 
                 underlineColorAndroid="transparent"
-                rightIcon={props.rightIcon}
-                leftIcon={props.leftIcon}
-                rightIconContainerStyle = {props.rightIconContainerStyle }
-                leftIconContainerStyle = {props.leftIconContainerStyle}
-                label={props.label}
                 labelStyle={[props.labelStyle, styles.labelStyle]}
-                keyboardType={props.keyboardType}
-                maxLength={props.maxLength}
-                disabled={props?.disabled}
                 {...rest}
                 />
                 { typeof props?.helperText !== "string" ? props?.helperText : <Text onPress={helperOnPress} style={{
