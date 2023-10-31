@@ -12,11 +12,13 @@ import ActionButton from "../../../components/Atoms/Buttons/ActionButton";
 import { Link } from "expo-router";
 import TopicList from "./topic-list";
 import { useTheme } from "@rneui/themed";
+import ModalScreen from "../../modal";
 
 
 const Topics = () => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [search, setSearch] = useState<string>("");
+  const [modalVisible, setModalVisible] = useState(false)
   const {theme} = useTheme()
   const handleCategoryFilter = () => {};
   const handlePopularityFilter = () => {};
@@ -32,8 +34,17 @@ const Topics = () => {
   const onBackdropPress = () => {
     setIsVisible(false);
   };
-  const handleJoinTap = () => {};
-  const onContinueTap = () => {};
+  const handleJoinTap = () => {
+
+    setModalVisible(!modalVisible)
+
+  };
+  const onContinueTap = () => {
+
+
+    setModalVisible(!modalVisible)
+
+  };
   return (
     <ScrollView style={{ padding: 15, backgroundColor: theme.colors.background }}>
       <View style={{ paddingBottom: 20 }}>
@@ -56,6 +67,9 @@ const Topics = () => {
         <View>
           <AvailableTopics />
         </View>
+       { modalVisible && <View>
+          <ModalScreen />
+        </View>}
         <View style={{ paddingTop: 40 }}>
           <ActionButton onPress={onContinueTap} fullWidth>
             Continue
