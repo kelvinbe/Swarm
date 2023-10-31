@@ -4,9 +4,9 @@ import ImageCard from "../../Atoms/Images/ImageCard";
 import { makeStyles, useTheme } from "@rneui/themed";
 
 interface Props {
-    imageUri: string;
-    title: string;
-    summary: string;
+    imageUri?: string;
+    title?: string;
+    summary?: string;
     onPress: ()=>void;
 }
 
@@ -16,11 +16,11 @@ const SummaryCard = (props: Props) => {
   const styles = useStyles()
   return (
     <TouchableOpacity onPress={onPress} style={styles.container}>
-    <View style={{ height: "auto", gap: 5, marginBottom: 10,}}>
+    <View style={{ height: "auto", gap: 5}}>
       <View style={{borderRadius: 15}}>
-        <ImageCard imageUrl={imageUri}/>
+        <ImageCard  imageUrl={imageUri}/>
       </View>
-      <View style={{ gap: 5, }}>
+      <View>
         <Text style={{ fontWeight: "700", fontSize: 14, color: theme.colors.text }}>
           {title}
         </Text>
@@ -39,6 +39,6 @@ const useStyles = makeStyles(()=>({
   container:{
     padding: 0,
     margin: 0,
-    width: "48%",
+    width: "100%",
   }
 }))

@@ -4,15 +4,12 @@ import { makeStyles } from "@rneui/themed";
 
 interface IProps {
   title: string;
-  data: {
-    title: string;
-    imageUrl: string;
-    summary: string;
-  }[];
+  image: string;
+  summary: string;
 }
 
 const TopicSummaryListCard = (props: IProps) => {
-  const { title, data } = props;
+  const { title, image } = props;
   const styles = useStyles();
 
   const handleSeeAll = () => {};
@@ -20,23 +17,19 @@ const TopicSummaryListCard = (props: IProps) => {
 
   return (
       <View style={styles.container}>
+
+        <View style={styles.cards}>
+            <SummaryCard
+              imageUri={image}
+              onPress={onSummaryCardPress}
+            />
+        </View>
         <View style={styles.headers}>
           <Text
-          style={[styles.textStyles, {fontWeight: '600'}]}>{title}</Text>
+          style={[styles.textStyles, {fontWeight: '600', width: 300}]}>{title}</Text>
           <TouchableOpacity onPress={handleSeeAll}>
             <Text style={styles.textStyles}>See All</Text>
           </TouchableOpacity>
-        </View>
-        <View style={styles.cards}>
-          {data.map((item, index) => (
-            <SummaryCard
-              key={index}
-              imageUri={item.imageUrl}
-              title={item.title}
-              summary={item.summary}
-              onPress={onSummaryCardPress}
-            />
-          ))}
         </View>
       </View>
   );
@@ -45,7 +38,9 @@ const TopicSummaryListCard = (props: IProps) => {
 export default TopicSummaryListCard;
 
 const useStyles = makeStyles((theme) => ({
-  container: {},
+  container: {    
+    marginTop: 20
+  },
   headers: {
     display: "flex",
     flexDirection: "row",
@@ -56,7 +51,8 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "row",
     flexWrap: "wrap",
-    gap: 13,
+    gap: 5,  
+    width: '100%',
   },
   textStyles: {
     color: theme.colors.text
