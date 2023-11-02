@@ -7,6 +7,8 @@ interface Props extends InputProps{
 }
 const TextArea = (props: Props) => {
   const styles = useStyles();
+  const {containerStyle, labelStyle, placeholder, ref, ...rest } = props
+
   return (
     <View style={styles.containerStyle}>
       <Input
@@ -17,6 +19,7 @@ const TextArea = (props: Props) => {
         inputStyle={styles.inputStyles}
         placeholder={props.placeholder? props.placeholder: "Enter some text here"}
         placeholderTextColor={'#00000073'}
+        {...rest}
       />
     </View>
   );

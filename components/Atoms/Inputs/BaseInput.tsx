@@ -6,6 +6,7 @@ interface IProps {
   fullWidth?: boolean;
   width?: number | string;
   placeholder?: string;
+  clear: boolean
 }
 
 type Props = IProps & InputProps;
@@ -64,11 +65,12 @@ const useStyles = makeStyles((theme, props: Props) => {
 
 const BaseInput = (props: Props) => {
   const styles = useStyles(props);
-  const { width, fullWidth, containerStyle, labelStyle, placeholder, ref, ...rest } = props
+  const {clear, width, fullWidth, containerStyle, labelStyle, placeholder, ref, ...rest } = props
   return (
     <ThemeConsumer>
       {({ theme }) => (
         <Input
+          clearTextOnFocus={clear}
           inputContainerStyle={styles.inputContainerStyle}
           style={styles.style}
           errorStyle={styles.errorStyle}
@@ -78,6 +80,7 @@ const BaseInput = (props: Props) => {
           underlineColorAndroid="transparent"
           labelStyle={[labelStyle, styles.labelStyle]}
           {...rest}
+          
         />
       )}
     </ThemeConsumer>

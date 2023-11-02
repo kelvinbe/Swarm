@@ -9,21 +9,25 @@ interface IProps {
   filterVisible?: boolean;
   searchVisible?: boolean;
   setSearch?: (search: string) => void;
+  search: string;
 }
 const SearchAndFilter = (props: IProps) => {
-  const { setIsVisible, searchVisible, filterVisible, setSearch } = props;
+  const { setIsVisible, searchVisible, filterVisible, setSearch, search } = props;
   const styles = useStyles();
   const { theme } = useTheme();
   const onFilterTap = () => {
     setIsVisible && setIsVisible(true);
   };
+
+  console.log('search1111', search)
   return (
     <View style={styles.container}>
       {searchVisible && (
         <View style={{ width: !filterVisible ? "100%" : 300 }}>
           <InputWithIcon
+            value={search}
             name="search"
-            onChangeText={setSearch}
+            onChangeText={(value) => setSearch(value)}
             placeholder="Search"
           />
         </View>
@@ -51,5 +55,6 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    paddingBottom: 20
   },
 }));
