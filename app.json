@@ -19,9 +19,9 @@
       "supportsTablet": true
     },
     "android": {
-      "versionCode": 5, 
+      "versionCode": 7, 
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/playstore.png",
+        "foregroundImage": "./assets/images/appstore.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.kelvinkb.swarm"

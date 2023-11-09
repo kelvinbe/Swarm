@@ -8,6 +8,9 @@ import { BottomSheet } from "@rneui/base";
 import FilterCard from "../../../components/Molecules/Cards/FilterCard";
 import { useTheme } from "@rneui/themed";
 
+
+
+
 const ChooseTopic = () => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [search, setSearch] = useState<string>("");
@@ -48,7 +51,7 @@ const ChooseTopic = () => {
           <IconButton name="add" onPress={handleJoinTap} title="Join" />
         </View>
         <View>
-          <AvailableTopics />
+          <AvailableTopics Topics={Topics} />
         </View>
         <View style={{ paddingTop: 40 }}>
           <ActionButton onPress={onContinueTap} fullWidth>

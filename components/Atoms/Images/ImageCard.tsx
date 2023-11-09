@@ -8,7 +8,7 @@ interface IProps {
   borderRadius?: number;
 }
 
-const ImageCard = (props: IProps) => {
+const  ImageCard = (props: IProps) => {
   const { imageUrl, height, width, borderRadius } = props;
   return (
     <View>

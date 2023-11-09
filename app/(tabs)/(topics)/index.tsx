@@ -9,10 +9,56 @@ import { BottomSheet } from "@rneui/base";
 import { useState } from "react";
 import IconButton from "../../../components/Atoms/Buttons/IconButton";
 import ActionButton from "../../../components/Atoms/Buttons/ActionButton";
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import TopicList from "./topic-list";
 import { useTheme } from "@rneui/themed";
 import ModalScreen from "../../modal";
+
+
+const Topicss = [
+  {
+    id: 0,
+    title: "Financial Prediction",
+    checked: false,
+    posts: 453,
+    views: 83773,
+  },
+  {
+    id: 1,
+    title: "Environmental Issues",
+    checked: false,
+    posts: 490,
+    views: 83773,
+  },
+  {
+    id: 2,
+    title: "Sports Prediction",
+    checked: false,
+    posts: 553,
+    views: 83773,
+  },
+  {
+    id: 3,
+    title: "Product Recommendation",
+    checked: false,
+    posts: 353,
+    views: 83773,
+  },
+  {
+    id: 4,
+    title: "Artificial Intelligence",
+    checked: false,
+    posts: 253,
+    views: 83773,
+  },
+  {
+    id: 5,
+    title: "Educational Reforms",
+    checked: false,
+    posts: 653,
+    views: 83773,
+  },
+];
 
 
 const Topics = () => {
@@ -20,6 +66,8 @@ const Topics = () => {
   const [search, setSearch] = useState<string>("");
   const [modalVisible, setModalVisible] = useState(false)
   const {theme} = useTheme()
+  const {push} = useRouter()
+
   const handleCategoryFilter = () => {};
   const handlePopularityFilter = () => {};
   const handleRecencyFilter = () => {};
@@ -40,9 +88,8 @@ const Topics = () => {
 
   };
   const onContinueTap = () => {
-
-
     setModalVisible(!modalVisible)
+    push('home')
 
   };
   return (
@@ -65,11 +112,11 @@ const Topics = () => {
           <IconButton name="add" onPress={handleJoinTap} title="Join" />
         </View>
         <View>
-          <AvailableTopics />
+          <AvailableTopics Topics={Topicss} />
         </View>
-       { modalVisible && <View>
-          <ModalScreen />
-        </View>}
+      {/* {modalVisible && <View>
+          <ModalScreen Topics={Topicss} />
+        </View>} */}
         <View style={{ paddingTop: 40 }}>
           <ActionButton onPress={onContinueTap} fullWidth>
             Continue

@@ -10,7 +10,7 @@ interface Props {
     onPress: ()=>void;
 }
 
-const SummaryCard = (props: Props) => {
+const  SummaryCard = (props: Props) => {
   const {imageUri, title, summary, onPress} = props;
   const {theme}= useTheme();
   const styles = useStyles()
@@ -18,7 +18,7 @@ const SummaryCard = (props: Props) => {
     <TouchableOpacity onPress={onPress} style={styles.container}>
     <View style={{ height: "auto", gap: 5}}>
       <View style={{borderRadius: 15}}>
-        <ImageCard  imageUrl={imageUri}/>
+        <ImageCard imageUrl={imageUri}/>
       </View>
       <View>
         <Text style={{ fontWeight: "700", fontSize: 14, color: theme.colors.text }}>

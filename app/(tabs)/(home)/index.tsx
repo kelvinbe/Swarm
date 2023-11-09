@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import SwarmForm from "../../../components/Organisims/Swarms/SwarmForm";
 import axios from "axios";
 import {NEWS_API_KEY} from '@env'
+import { supabase } from "../../../lib/supabase";
 
 
 
@@ -19,8 +20,9 @@ const HomeView = () => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [search, setSearch] = useState<string>('Technology')
   const [swarmFormVisible, setSwarmFormVisible] = useState(false)
-  const [data, setData] = useState([])
+  const [dataL, setData] = useState([])
   const [loading, setLoading] = useState(false)
+  const [dbData, setDBData] = useState([])
 
 
 
@@ -45,7 +47,6 @@ const HomeView = () => {
     setIsVisible(true)
   }
 
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -62,9 +63,9 @@ const HomeView = () => {
   }
   
     fetchData()
-  }, [search])
+  }, [search]);
 
-  console.log('search2222', search)
+
 
   return (
       <View style={{ padding: 15  }}>
@@ -74,10 +75,10 @@ const HomeView = () => {
         
         <SearchAndFilter search={search} filterVisible searchVisible setIsVisible={setIsVisible} setSearch={setSearch}/>
     <ScrollView style={{backgroundColor: theme.colors.background, padding: 15}}>
-       {loading ?(<View style={styles.loader}>
+  {loading ?(<View style={styles.loader}>
         <ActivityIndicator size={"large"} />
   </View>
-) : <TopicSummaryList data={data} /> }
+) : <TopicSummaryList data={dataL} /> }
     </ScrollView>
 
         <BottomSheet isVisible={isVisible} onBackdropPress={onBackdropPress}>

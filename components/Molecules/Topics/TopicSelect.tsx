@@ -1,5 +1,7 @@
 import { CheckBox,  makeStyles,  useTheme } from "@rneui/themed";
 import { View, Text } from "react-native";
+import { CountUp } from 'use-count-up'
+
 
 interface IProps {
   title: string;
@@ -36,7 +38,10 @@ const TopicSelect = (props: IProps) => {
           ></CheckBox>
         </View>
         <View style={styles.postsStyles}>
-          <Text style={styles.titleStyles}>{posts}</Text>
+          <Text style={styles.titleStyles}>
+          <CountUp isCounting={checked} end={posts} duration={3.2} />
+
+          </Text>
         </View>
         <View style={styles.viewsStyles}>
           <Text style={styles.titleStyles}>{views}</Text>

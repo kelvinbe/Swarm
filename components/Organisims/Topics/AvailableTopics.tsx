@@ -1,64 +1,40 @@
 import { CheckBox } from "@rneui/base";
 import { ThemeProvider, makeStyles, useThemeMode } from "@rneui/themed";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { View, Text, useColorScheme } from "react-native";
 import TopicSelect from "../../Molecules/Topics/TopicSelect";
 import { darkTheme, lightTheme } from "../../../rn-elements";
 import SocialInteractionButton from "../../Atoms/Buttons/SocialInteractionButton";
 import SocialInteraction from "../../Molecules/Social/SocialInteraction";
 
-interface Props {}
-const topics = [
-  {
-    id: 1,
-    title: "Financial Prediction",
-    checked: false,
-    posts: 453,
-    views: 83773,
-  },
-  {
-    id: 2,
-    title: "Environmental Issues",
-    checked: true,
-    posts: 453,
-    views: 83773,
-  },
-  {
-    id: 3,
-    title: "Sports Prediction",
-    checked: false,
-    posts: 453,
-    views: 83773,
-  },
-  {
-    id: 4,
-    title: "Product Recommendation",
-    checked: true,
-    posts: 453,
-    views: 83773,
-  },
-  {
-    id: 5,
-    title: "Artificial Intelligence",
-    checked: false,
-    posts: 453,
-    views: 83773,
-  },
-  {
-    id: 6,
-    title: "Educational Reforms",
-    checked: false,
-    posts: 453,
-    views: 83773,
-  },
-];
-const AvailableTopics = () => {
+interface Props {
+  Topics?:  {
+    id: number,
+    title: string,
+    checked: boolean,
+    posts: number,
+    views: number,
+  }[]
+}
+
+const AvailableTopics = (props: Props) => {
+  const {Topics} = props
+
+  const [topics, setTopics] = useState(Topics)
   const styles = useStyles();
-  const handleTopicSelect = (data: any)=>{
-    /**
-     * @todo implement topic select logic
-     */
-  }
+  const handleTopicSelect = (index: number)=>{
+    const updatedTopics = [...topics];
+    updatedTopics[index] = {
+      ...updatedTopics[index],
+      checked: !updatedTopics[index].checked,
+    };
+    setTopics(updatedTopics);
+
+}
+
+useEffect(() => {
+
+}, [topics])
 
   return (
     <View style={styles.container}>
@@ -77,7 +53,7 @@ const AvailableTopics = () => {
             <Text style={styles.titleStyles}>Views</Text>
           </View>
         </View>
-        {topics.map((topic, index) => (
+        {topics?.map((topic, index) => (
           <TopicSelect
             checked={topic.checked}
             title={topic.title}

@@ -6,10 +6,11 @@ interface IProps {
   title: string;
   image: string;
   summary: string;
+  description: string
 }
 
 const TopicSummaryListCard = (props: IProps) => {
-  const { title, image } = props;
+  const { title, image, description } = props;
   const styles = useStyles();
 
   const handleSeeAll = () => {};
@@ -24,13 +25,22 @@ const TopicSummaryListCard = (props: IProps) => {
               onPress={onSummaryCardPress}
             />
         </View>
+
         <View style={styles.headers}>
           <Text
-          style={[styles.textStyles, {fontWeight: '600', width: 300}]}>{title}</Text>
+          style={[styles.textStyles, {fontWeight: '600', width: 300}]}>
+            {title}
+            </Text>
           <TouchableOpacity onPress={handleSeeAll}>
             <Text style={styles.textStyles}>See All</Text>
           </TouchableOpacity>
         </View>
+
+        <View>
+          <Text
+          style={[styles.textStyles, {fontWeight: '600', width: 300}]}>{description}</Text>
+        </View>
+        
       </View>
   );
 };

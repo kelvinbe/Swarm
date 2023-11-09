@@ -19,10 +19,11 @@ const TopicSummaryList = (props: IProps) => {
     
   }, [])
 
+  console.log('dataLLLL', data)
   return (
     <View style={{paddingBottom: 20}}>
         {data?.map((item, index)=>(
-            <TopicSummaryListCard key={index} title={item.title} image={item.urlToImage}/>
+            <TopicSummaryListCard key={index} description={ item.category ? item.description : null} title={item.title} image={item.urlToImage}/>
         ))}
     </View>
   );
