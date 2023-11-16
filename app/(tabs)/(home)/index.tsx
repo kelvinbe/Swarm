@@ -1,4 +1,4 @@
-import { View, ScrollView, StyleSheet, Text, ActivityIndicator } from "react-native";
+import { View, ScrollView, StyleSheet, Text, ActivityIndicator, Button, Alert } from "react-native";
 import { Link, useRouter } from "expo-router";
 import { useTheme, Skeleton,  } from "@rneui/themed";
 import IconButton from "../../../components/Atoms/Buttons/IconButton";
@@ -11,6 +11,7 @@ import SwarmForm from "../../../components/Organisims/Swarms/SwarmForm";
 import axios from "axios";
 import {NEWS_API_KEY} from '@env'
 import { supabase } from "../../../lib/supabase";
+import { ALERT_TYPE, Dialog, AlertNotificationRoot, Toast } from 'react-native-alert-notification';
 
 
 
@@ -47,24 +48,74 @@ const HomeView = () => {
     setIsVisible(true)
   }
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true)
-        const response = await axios.get(`https://newsapi.org/v2/everything?q=${search.length > 0 ? search : 'Technology'}&apiKey=${NEWS_API_KEY}`)
-  
-        const filteredData = response.data.articles.slice(80)
-  
-        setData(filteredData)
-        setLoading(false)
-      } catch (err) {
-        console.log(err)
+  const options = {
+    method: 'POST',
+    url: 'https://realtor.p.rapidapi.com/properties/v3/list',
+    headers: {
+      'content-type': 'application/json',
+      'X-RapidAPI-Key': 'bcb659df96msh1d61b442ebc1883p1f566ejsn56992c7d7f79',
+      'X-RapidAPI-Host': 'realtor.p.rapidapi.com'
+    },
+    data: {
+      limit: 200,
+      offset: 0,
+      postal_code: '90004',
+      status: [
+        'for_sale',
+        'ready_to_build'
+      ],
+      sort: {
+        direction: 'desc',
+        field: 'list_date'
       }
-  }
-  
-    fetchData()
-  }, [search]);
+    }
+  };
 
+
+  const fetchData = async (search: string) => {
+    try {
+      setLoading(true);
+      const response = await axios.request(options);
+  
+      if (response) {
+        const filteredData = response.data?.data?.home_search.results.slice(50)
+        return filteredData;
+      } else {
+        console.error('Invalid API response:', response);
+        return [];
+      }
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      return [];
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const showAlert = () => {
+    Alert.alert(
+      'Info',
+      'Development is still ongoing. Updates Coming Soon. Please press close',
+      [
+        { text: 'Close', onPress: () => console.log('OK Pressed') }
+      ],
+      { cancelable: false }
+    );
+  };
+
+  useEffect(() => {
+    const fetchDataAndUpdateState = async () => {
+      const filteredData = await fetchData(search);
+      setData(filteredData);
+      setLoading(false);
+    };
+
+    setTimeout(() => {
+        showAlert()
+    }, 3000)
+
+    fetchDataAndUpdateState();
+  }, []);
 
 
   return (
@@ -72,7 +123,6 @@ const HomeView = () => {
       <View style={{display: 'flex', flexDirection:'row', justifyContent: 'flex-end', paddingBottom: 20}}>
         <IconButton name="add" onPress={handleCreateSwarm} title="Create Swarm"/> 
       </View>
-        
         <SearchAndFilter search={search} filterVisible searchVisible setIsVisible={setIsVisible} setSearch={setSearch}/>
     <ScrollView style={{backgroundColor: theme.colors.background, padding: 15}}>
   {loading ?(<View style={styles.loader}>
@@ -90,8 +140,6 @@ const HomeView = () => {
             handleSwarmLevelFilter={handleSwarmLevelFilter}
             onDonePress={onFilterApply}
           />}
-
-        {swarmFormVisible && <SwarmForm />}
         </BottomSheet>
       </View>
   );

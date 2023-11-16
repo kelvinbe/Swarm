@@ -19,7 +19,6 @@ const SearchAndFilter = (props: IProps) => {
     setIsVisible && setIsVisible(true);
   };
 
-  console.log('search1111', search)
   return (
     <View style={styles.container}>
       {searchVisible && (

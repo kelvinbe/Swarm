@@ -17,15 +17,15 @@ const  SummaryCard = (props: Props) => {
   return (
     <TouchableOpacity onPress={onPress} style={styles.container}>
     <View style={{ height: "auto", gap: 5}}>
-      <View style={{borderRadius: 15}}>
-        <ImageCard imageUrl={imageUri}/>
+      <View >
+        <ImageCard height={100} width={100} imageUrl={imageUri} borderRadius={30}/>
       </View>
       <View>
         <Text style={{ fontWeight: "700", fontSize: 14, color: theme.colors.text }}>
           {title}
         </Text>
         <Text style={{ fontWeight: "400", fontSize: 12, textAlign: 'justify', color: theme.colors.text}}>
-         {summary}
+        {summary}
         </Text>
       </View>
     </View>
@@ -39,6 +39,6 @@ const useStyles = makeStyles(()=>({
   container:{
     padding: 0,
     margin: 0,
-    width: "100%",
+    width: "50%",
   }
 }))

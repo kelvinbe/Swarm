@@ -4,6 +4,7 @@ import { Platform, StyleSheet } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
+import { useLocalSearchParams } from "expo-router";
 
 
 interface IProps {
@@ -23,7 +24,6 @@ export default function ModalScreen(props: IProps) {
 
 
   useEffect(() => {
-    console.log('topics', Topics)
   }, [Topics])
   return (
     <View style={styles.container}>

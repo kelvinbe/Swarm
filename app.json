@@ -19,7 +19,7 @@
       "supportsTablet": true
     },
     "android": {
-      "versionCode": 7, 
+      "versionCode": 10, 
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/appstore.png",
         "backgroundColor": "#ffffff"
@@ -35,7 +35,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "50605a26-293c-474b-a67c-f8636ca22faa"
+        "projectId": "2d9dc0c7-abe8-4aca-beaf-8c219b20b77e"
       }
     }
   }

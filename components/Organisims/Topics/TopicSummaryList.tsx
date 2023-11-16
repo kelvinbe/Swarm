@@ -4,26 +4,29 @@ import { GET_SWARM_ENDPOINT } from "../../../hooks/constants";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-
 interface IProps {
-  data: {}[]
+  data: {}[];
 }
 
-
 const TopicSummaryList = (props: IProps) => {
+  const { data } = props;
+  useEffect(() => {}, []);
 
-  const {data} = props
-  useEffect(() => {
-
-
-    
-  }, [])
-
-  console.log('dataLLLL', data)
   return (
-    <View style={{paddingBottom: 20}}>
-        {data?.map((item, index)=>(
-            <TopicSummaryListCard key={index} description={ item.category ? item.description : null} title={item.title} image={item.urlToImage}/>
+    <View style={{ paddingBottom: 80 }}>
+      {data?.length > 0 &&
+        data?.map((item, index) => (
+          <TopicSummaryListCard
+            key={index}
+            description={item?.products?.brand_name}
+            title={item?.status}
+            image={item?.primary_photo?.href}
+            baths={item?.description?.baths}
+            family={item?.description?.type}
+            price={item?.estimate?.estimate}
+            size={item?.description?.sqft}
+            bedrooms={item.description.beds}
+          />
         ))}
     </View>
   );
