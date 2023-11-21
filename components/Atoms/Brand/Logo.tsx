@@ -11,7 +11,7 @@ const Logo = (props: IProps) => {
   return (
     <View style={styles.container}>
       <Image
-        source={require("../../../assets/images/Logo.png")}
+        source={require("../../../assets/images/appstore.png")}
         style={{ width: props.width?? 100, height: props.height?? 100, aspectRatio: 1 }}
         resizeMode="contain"
       />

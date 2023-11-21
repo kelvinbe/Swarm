@@ -3,8 +3,8 @@ import SummaryCard from "../../Molecules/Cards/SummaryCard";
 import { makeStyles } from "@rneui/themed";
 import { Ionicons, FontAwesome, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons'; 
 import { Rating, AirbnbRating } from 'react-native-ratings';
-
-
+import { Link, useRouter } from "expo-router";
+import _ from 'lodash'
 
 interface IProps {
   title: string;
@@ -21,55 +21,41 @@ interface IProps {
 const TopicSummaryListCard = (props: IProps) => {
   const { title, image, description, price, bedrooms, baths, size, family } = props;
   const styles = useStyles();
+  const router = useRouter();
 
   const handleSeeAll = () => {};
   const onSummaryCardPress = () => {};
 
+  const pass = { image, description, baths, bedrooms, price }
+
+  const toHome = () => {
+    const isValidData = Object.values(pass).every(value => value !== undefined);
+    
+    console.log('data',image)
+
+    if(isValidData){
+    router.push({ pathname: "/payments", params: pass })
+
+    }else {
+      console.error("Invalid data in pass object");
+    }
+  }
+
   return (
-      <View style={styles.container}>
-        <View style={{flexDirection: 'row',     shadowRadius: 20,
-    shadowColor: 'black'}}>
-        <View style={styles.cards}>
+      <TouchableOpacity onPress={toHome}  style={styles.container}>
+        <View>
             <SummaryCard
               imageUri={image}
               onPress={onSummaryCardPress}
+              description={description}
+              baths={baths}
+              bedrooms={bedrooms}
+              onPress={toHome}
+              price={300000}
+
             />
         </View>
-        <View style={styles.headers}>
-          <Text
-          style={[styles.textStyles, {fontWeight: 'bold', fontSize: 15}]}>
-            {description === 'essentials' ? 'Pent House Apartment': 'Bungalow House'}
-           
-            </Text>
-          <TouchableOpacity onPress={handleSeeAll}>
-            <View style={styles.textStyles}>
-              <View style={styles.icons}>
-              <Ionicons name="bed-outline" size={24} color="black" />    
-              <Text style={styles.iconText}>{bedrooms === null ? 2 : bedrooms}</Text>
-              </View>
-              <View style={styles.icons}>
-              <FontAwesome name="bathtub" size={24} color="black" />  
-              <Text style={styles.iconText}>{baths}</Text>
-
-              </View>
-              <View style={styles.icons}>
-              <MaterialCommunityIcons name="move-resize" size={24} color="black" /> 
-              <Text style={styles.iconText}>{size} ft</Text>
-
-              </View> 
-              <View style={styles.icons}>
-              <MaterialIcons name="family-restroom" size={24} color="black" /> 
-              <Text style={styles.iconText}>{family}</Text>
-              </View> 
-              <View style={styles.rating} >
-              <Rating 
-            imageSize={25}/>
-                </View> 
-            </View>
-          </TouchableOpacity>
-        </View>
-        </View>
-        </View>
+        </TouchableOpacity>
   );
 };
 
@@ -90,7 +76,6 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "row",
     flexWrap: "wrap",
     gap: 5,
-    width: 300,
   },
   textStyles: {
     color: theme.colors.text
@@ -106,6 +91,6 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 5
   },
   rating: {
-    marginRight: 20
+    
   }
 }));

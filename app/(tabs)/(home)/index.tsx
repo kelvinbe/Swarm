@@ -1,6 +1,6 @@
 import { View, ScrollView, StyleSheet, Text, ActivityIndicator, Button, Alert } from "react-native";
 import { Link, useRouter } from "expo-router";
-import { useTheme, Skeleton,  } from "@rneui/themed";
+import { useTheme, Skeleton, makeStyles  } from "@rneui/themed";
 import IconButton from "../../../components/Atoms/Buttons/IconButton";
 import SearchAndFilter from "../../../components/Molecules/Topics/SearchAndFilter";
 import { BottomSheet } from "@rneui/base";
@@ -24,6 +24,8 @@ const HomeView = () => {
   const [dataL, setData] = useState([])
   const [loading, setLoading] = useState(false)
   const [dbData, setDBData] = useState([])
+  const styles = useStyles();
+
 
 
 
@@ -119,16 +121,12 @@ const HomeView = () => {
 
 
   return (
-      <View style={{ padding: 15  }}>
-      <View style={{display: 'flex', flexDirection:'row', justifyContent: 'flex-end', paddingBottom: 20}}>
-        <IconButton name="add" onPress={handleCreateSwarm} title="Create Swarm"/> 
-      </View>
-        <SearchAndFilter search={search} filterVisible searchVisible setIsVisible={setIsVisible} setSearch={setSearch}/>
-    <ScrollView style={{backgroundColor: theme.colors.background, padding: 15}}>
+      <View style={styles.container}>
+    <ScrollView style={{  padding: 15}}>
   {loading ?(<View style={styles.loader}>
         <ActivityIndicator size={"large"} />
   </View>
-) : <TopicSummaryList data={dataL} /> }
+) : <TopicSummaryList data={dataL} />}
     </ScrollView>
 
         <BottomSheet isVisible={isVisible} onBackdropPress={onBackdropPress}>
@@ -147,7 +145,11 @@ const HomeView = () => {
 
 export default HomeView;
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles((theme) => ({
+  container: {
+    backgroundColor: theme.colors.background, 
+    padding: 15, 
+    flex : 1 },
   lottie: {
     width: 100,
     height: 100,
@@ -157,4 +159,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   }
-});
+}))
