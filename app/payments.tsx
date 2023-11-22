@@ -1,14 +1,14 @@
 // PaymentPage.js
 
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, KeyboardAvoidingView, Platform, Keyboard } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, KeyboardAvoidingView, Platform, Keyboard, ScrollView } from 'react-native';
 import VisaCard from '../components/Molecules/Cards/VisaCard';
 import { makeStyles } from "@rneui/themed";
 import { useFonts, Lato_700Bold } from '@expo-google-fonts/lato';
 import { useNavigation, useRouter, useLocalSearchParams } from "expo-router";
 import TopicSummaryListCard from '../components/Organisims/Topics/TopicsSummaryListCard';
 import { Image, ImageProps } from "@rneui/base";
-
+import CarouselCards from '../components/Organisims/Carousel/CarouselCards';
 
 const Payments = () => {
   // State to hold the card details
@@ -101,30 +101,28 @@ const Payments = () => {
     style={{ flex: 1 }}
     behavior="padding"
     keyboardVerticalOffset={Platform.OS === 'ios' ? 64 : 0}>
+      <ScrollView>
     <View style={styles.container}>
-    <View style={{flex: 1, marginTop: -20}}>
+    <View style={{flex: 1}}>
       <Text style={styles.headerText}>Purchase Property</Text>
+    </View>
+    <View style={{flex: 4}}>
+    <CarouselCards />
     </View>
       <View style={styles.cardContainer}>
         <View>
-      <Image
-        source={{uri: image}}
-        style={{
-          width: '100%',
-          height: 100,
-          marginTop: -20
-        }}
-        resizeMode="contain"
-      />
       </View>
       <View>
-        <Text>Description : {description === 'essentials' ? 'Pent House Apartment': 'Bungalow House'}</Text>
-        <Text>Baths: {baths}</Text>
-        <Text>Bedrooms: {bedrooms}</Text>
-        <Text>Price: {price}</Text>
+        <Text style={styles.descriptionText}>Description : {description === 'essentials' ? 'Pent House Apartment': 'Bungalow House'}</Text>
+        <Text style={styles.descriptionText}>Baths: {baths}</Text>
+        <Text style={styles.descriptionText}>Bedrooms: {bedrooms}</Text>
+        <Text style={styles.descriptionText}>Price: {price}</Text>
       </View>
       </View>
       <View style={styles.formContainer}>
+      <View>
+      <Text style={styles.cardText}>Add Card Details</Text>
+    </View>
         <TextInput
           style={styles.input}
           placeholder="Card Number"
@@ -160,6 +158,7 @@ const Payments = () => {
         <Text style={styles.buttonText}>Make Payment</Text>
       </TouchableOpacity> }
     </View>
+    </ScrollView>
     </KeyboardAvoidingView>
     );
 };
@@ -218,5 +217,14 @@ const useStyles = makeStyles((theme) =>({
     width: '100%',
     flexDirection: 'column',
     marginBottom: 10
+  },
+  descriptionText: {
+    fontWeight: 'bold'
+  },  
+  cardText: {
+    fontSize: 20, 
+    fontWeight: 'bold',
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 }));

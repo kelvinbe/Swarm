@@ -1,7 +1,7 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Tabs } from 'expo-router';
 import { View, useColorScheme } from 'react-native';
-import { Feather, Ionicons, Octicons } from '@expo/vector-icons';
+import { Feather, Ionicons, Octicons, FontAwesome5 } from '@expo/vector-icons';
 import { useTheme } from '@rneui/themed';
 
 /**
@@ -44,7 +44,7 @@ export default function TabLayout() {
         name="(topics)"
         options={{
           title: 'Topics',
-          tabBarIcon: ({ color }) => <Octicons name="book" size={24} color={color} />,
+          tabBarIcon: ({ color }) => <FontAwesome5 name="money-check-alt" size={24} color={color} />,
         }}
       />
       <Tabs.Screen

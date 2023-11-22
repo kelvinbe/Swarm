@@ -31,7 +31,7 @@ const TopicSummaryListCard = (props: IProps) => {
   const toHome = () => {
     const isValidData = Object.values(pass).every(value => value !== undefined);
     
-    console.log('data',image)
+    console.log('data',image, description, baths, bedrooms, price)
 
     if(isValidData){
     router.push({ pathname: "/payments", params: pass })
@@ -52,8 +52,7 @@ const TopicSummaryListCard = (props: IProps) => {
               bedrooms={bedrooms}
               onPress={toHome}
               price={300000}
-
-            />
+              />
         </View>
         </TouchableOpacity>
   );

@@ -57,9 +57,7 @@ function RootLayoutNav() {
     <>
       <Provider store={store}>
         <ThemeProvider theme={colorScheme === "dark" ? darkTheme : lightTheme}>
-          <NavigationThemeProvider
-            value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
-          >
+          <NavigationThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
             <Stack>
               <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
               <Stack.Screen
@@ -167,8 +165,6 @@ function RootLayoutNav() {
                 }}
               />
             </Stack>
-   
-            
           </NavigationThemeProvider>
         </ThemeProvider>
       </Provider>

@@ -90,8 +90,8 @@ const Topics = () => {
   const onContinueTap = () => {
     setModalVisible(!modalVisible)
     push('home')
-
-  };
+  
+};
   return (
     <ScrollView style={{ padding: 15, backgroundColor: theme.colors.background }}>
       <View style={{ paddingBottom: 20 }}>

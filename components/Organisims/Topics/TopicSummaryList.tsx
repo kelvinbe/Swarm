@@ -23,7 +23,7 @@ const TopicSummaryList = (props: IProps) => {
             image={item?.primary_photo?.href}
             baths={item?.description?.baths}
             family={item?.description?.type}
-            price={item?.estimate?.estimate}
+            price={300000}
             size={item?.description?.sqft}
             bedrooms={item.description.beds}
           />
