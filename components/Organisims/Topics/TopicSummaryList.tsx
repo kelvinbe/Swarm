@@ -15,8 +15,9 @@ const TopicSummaryList = (props: IProps) => {
   return (
     <View style={{ paddingBottom: 80 }}>
       {data?.length > 0 &&
-        data?.map((item, index) => (
-          <TopicSummaryListCard
+        data?.map((item, index) => {
+
+        return <TopicSummaryListCard
             key={index}
             description={item?.products?.brand_name}
             title={item?.status}
@@ -26,8 +27,9 @@ const TopicSummaryList = (props: IProps) => {
             price={300000}
             size={item?.description?.sqft}
             bedrooms={item.description.beds}
+            propertyId={item.property_id}
           />
-        ))}
+})}
     </View>
   );
 };

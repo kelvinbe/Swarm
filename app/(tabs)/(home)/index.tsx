@@ -55,7 +55,7 @@ const HomeView = () => {
     url: 'https://realtor.p.rapidapi.com/properties/v3/list',
     headers: {
       'content-type': 'application/json',
-      'X-RapidAPI-Key': 'bcb659df96msh1d61b442ebc1883p1f566ejsn56992c7d7f79',
+      'X-RapidAPI-Key': '66f5d56857msh6afbfded9d0045ap13f7ffjsn162c3d12f50a',
       'X-RapidAPI-Host': 'realtor.p.rapidapi.com'
     },
     data: {

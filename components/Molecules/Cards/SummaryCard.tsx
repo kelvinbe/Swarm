@@ -19,7 +19,8 @@ interface Props {
     price: number;
     baths: number;
     size: number;
-    family: string
+    family: string;
+    propertyId: string;
 }
 
 const  SummaryCard = (props: Props) => {

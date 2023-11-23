@@ -1,7 +1,7 @@
 // PaymentPage.js
 
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, KeyboardAvoidingView, Platform, Keyboard, ScrollView } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, KeyboardAvoidingView, Platform, Keyboard, ScrollView, ActivityIndicator } from 'react-native';
 import VisaCard from '../components/Molecules/Cards/VisaCard';
 import { makeStyles } from "@rneui/themed";
 import { useFonts, Lato_700Bold } from '@expo-google-fonts/lato';
@@ -9,6 +9,9 @@ import { useNavigation, useRouter, useLocalSearchParams } from "expo-router";
 import TopicSummaryListCard from '../components/Organisims/Topics/TopicsSummaryListCard';
 import { Image, ImageProps } from "@rneui/base";
 import CarouselCards from '../components/Organisims/Carousel/CarouselCards';
+import axios from 'axios';
+
+
 
 const Payments = () => {
   // State to hold the card details
@@ -16,6 +19,8 @@ const Payments = () => {
   const [expiryDate, setExpiryDate] = useState('');
   const [cvv, setCVV] = useState('');
   const [cardHolderName, setCardHolderName] = useState("John Doe")
+  const [images, setImages] = useState([])
+  const [loading, setLoading] = useState(false)
   const styles = useStyles();
   const params = useLocalSearchParams();
   const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
@@ -23,10 +28,61 @@ const Payments = () => {
   const separatorLength = 4; // Set the length after which you want to insert a space
 
 
-  const { description, baths, price, image, bedrooms } = params;
+
+  const { description, baths, price, image, bedrooms, propertyId } = params;
 
 
   // Check if the font is loaded before rendering the component
+
+
+const options = {
+  method: 'GET',
+  url: 'https://realtor.p.rapidapi.com/properties/v3/get-photos',
+  params: {
+    property_id: propertyId
+  },
+  headers: {
+    'X-RapidAPI-Key': '66f5d56857msh6afbfded9d0045ap13f7ffjsn162c3d12f50a',
+    'X-RapidAPI-Host': 'realtor.p.rapidapi.com'
+  }
+};
+
+
+const fetchImagesOnID = async () => {
+
+try {
+  setLoading(true)
+	const response = await axios.request(options);
+  if(response){
+    const filteredData = response?.data?.data?.home_search?.results[0]?.photos
+    return filteredData
+  }else{
+    console.error('Invalid API response', response)
+    return []
+  }
+} catch (error) {
+	console.error(error);
+} finally {
+  setLoading(false)
+}
+
+}
+
+
+
+
+
+
+  useEffect(() => {
+
+    const FetchDataAndSetState = async () => {
+      const fetchedImages = await fetchImagesOnID()
+      setImages(fetchedImages)
+      setLoading(false)
+    }
+
+    FetchDataAndSetState()
+  }, [propertyId])
 
 
   // Function to handle payment
@@ -106,9 +162,10 @@ const Payments = () => {
     <View style={{flex: 1}}>
       <Text style={styles.headerText}>Purchase Property</Text>
     </View>
-    <View style={{flex: 4}}>
-    <CarouselCards />
-    </View>
+  {loading ? <ActivityIndicator size={"large"} /> :
+  <View style={{flex: 4}}>
+    <CarouselCards  data={images}/>
+    </View>}
       <View style={styles.cardContainer}>
         <View>
       </View>

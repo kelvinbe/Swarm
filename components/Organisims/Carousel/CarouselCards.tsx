@@ -21,10 +21,25 @@ const data = [
     },
   ];
 
-const CarouselCards = () => {
+
+  interface IProps {
+
+    data : string[]
+
+  }
+
+const CarouselCards = (props: IProps) => {
   const isCarousel = React.useRef(null)
   const [index, setIndex] = useState(0)
-  
+  const {data} = props
+
+
+  const newArray = data.map((photo) => {
+
+      return {title: photo.__typename, imgUrl: photo.href}
+
+  })
+
 
   return (
     <View>
@@ -32,7 +47,7 @@ const CarouselCards = () => {
         layout="tinder"
         layoutCardOffset={9}
         ref={isCarousel}
-        data={data}
+        data={newArray}
         renderItem={CarouselCardItem}
         sliderWidth={SLIDER_WIDTH}
         itemWidth={ITEM_WIDTH}
