@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, KeyboardAvoidingView, ScrollView, TouchableOpacity, Platform, ActivityIndicator } from 'react-native';
+import { Link, useRouter } from "expo-router";
+
 
 const PaymentDetailsCard = ({ accountNumber, expiryDate, cvv, price }) => {
   // Assuming VAT is 15%
@@ -9,6 +11,7 @@ const PaymentDetailsCard = ({ accountNumber, expiryDate, cvv, price }) => {
 
   const [isLoading, setIsLoading] = useState(false)
 
+  const router = useRouter();
 
 
   const handlePayment = () => {
@@ -17,6 +20,7 @@ const PaymentDetailsCard = ({ accountNumber, expiryDate, cvv, price }) => {
 
     setTimeout(() => {
     setIsLoading(false);
+    router.push({ pathname: "/topics"});
 
     }, 3000)
 

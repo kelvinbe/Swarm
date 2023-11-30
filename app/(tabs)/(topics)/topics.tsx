@@ -95,28 +95,11 @@ const Topics = () => {
   return (
     <ScrollView style={{ padding: 15, backgroundColor: theme.colors.background }}>
       <View style={{ paddingBottom: 20 }}>
-        <SearchAndFilter
-          searchVisible
-          filterVisible
-          setSearch={setSearch}
-          setIsVisible={setIsVisible}
-        />
-        <View
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "flex-end",
-            paddingVertical: 20,
-          }}
-        >
-          <IconButton name="add" onPress={handleJoinTap} title="Join" />
-        </View>
+
         <View>
           <AvailableTopics Topics={Topicss} />
         </View>
-      {/* {modalVisible && <View>
-          <ModalScreen Topics={Topicss} />
-        </View>} */}
+
         <View style={{ paddingTop: 40 }}>
           <ActionButton onPress={onContinueTap} fullWidth>
             Continue

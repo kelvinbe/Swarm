@@ -48,7 +48,7 @@ const ChooseTopic = () => {
             paddingVertical: 20,
           }}
         >
-          <IconButton name="add" onPress={handleJoinTap} title="Join" />
+          <IconButton name="add" onPress={handleJoinTap} title="J " />
         </View>
         <View>
           <AvailableTopics Topics={Topics} />
