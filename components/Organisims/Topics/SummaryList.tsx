@@ -1,5 +1,5 @@
 import { View } from "react-native";
-import TopicSummaryListCard from "./TopicsSummaryListCard";
+import SummaryListCard from "./TopicsSummaryListCard";
 import { GET_SWARM_ENDPOINT } from "../../../hooks/constants";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -8,16 +8,16 @@ interface IProps {
   data: {}[];
 }
 
-const TopicSummaryList = (props: IProps) => {
+const SummaryList = (props: IProps) => {
   const { data } = props;
   useEffect(() => {}, []);
 
   return (
-    <View style={{ paddingBottom: 80 }}>
+    <View testID="summary-list" style={{ paddingBottom: 80 }}>
       {data?.length > 0 &&
         data?.map((item, index) => {
 
-        return <TopicSummaryListCard
+        return <SummaryListCard
             key={index}
             description={item?.products?.brand_name}
             title={item?.status}
@@ -34,4 +34,4 @@ const TopicSummaryList = (props: IProps) => {
   );
 };
 
-export default TopicSummaryList;
+export default SummaryList;

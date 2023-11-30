@@ -57,7 +57,7 @@ const TopicSummaryListCard = (props: IProps) => {
   };
 
   return (
-    <TouchableOpacity onPress={toHome} style={styles.container}>
+    <TouchableOpacity testID="single-summary-card"  onPress={toHome} style={styles.container}>
       <View>
         <SummaryCard
           imageUri={image}

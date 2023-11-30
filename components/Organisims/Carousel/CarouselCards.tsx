@@ -6,41 +6,19 @@ import CarouselCardItem, { SLIDER_WIDTH, ITEM_WIDTH } from './Carousel'
 
 
 
-const data = [
-    {
-      title: "Aenean leo",
-      imgUrl: "https://picsum.photos/id/11/200/300",
-    },
-    {
-      title: "In turpis",
-      imgUrl: "https://picsum.photos/id/10/200/300",
-    },
-    {
-      title: "Lorem Ipsum",
-      imgUrl: "https://picsum.photos/id/12/200/300",
-    },
-  ];
-
 
   interface IProps {
-
-    data : string[]
-
-  }
+  data : string[]
+}
 
 const CarouselCards = (props: IProps) => {
   const isCarousel = React.useRef(null)
   const [index, setIndex] = useState(0)
   const {data} = props
 
-
-  const newArray = data.map((photo) => {
-
-      return {title: photo.__typename, imgUrl: photo.href}
-
-  })
-
-
+const newArray = data.map((photo) => {
+    return {title: photo.alt, imgUrl: photo.src.medium}
+})
   return (
     <View>
     <Carousel

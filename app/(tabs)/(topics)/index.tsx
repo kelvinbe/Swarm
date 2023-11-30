@@ -2,7 +2,7 @@ import { View, Text, ScrollView } from "react-native";
 import AvailableTopics from "../../../components/Organisims/Topics/AvailableTopics";
 import SelectableTopicCard from "../../../components/Molecules/Cards/SelectableTopicCard";
 import TopicCard from "../../../components/Molecules/Cards/TopicCard";
-import TopicSummaryList from "../../../components/Organisims/Topics/TopicSummaryList";
+import TopicSummaryList from "../../../components/Organisims/Topics/SummaryList";
 import SearchAndFilter from "../../../components/Molecules/Topics/SearchAndFilter";
 import FilterCard from "../../../components/Molecules/Cards/FilterCard";
 import { BottomSheet } from "@rneui/base";

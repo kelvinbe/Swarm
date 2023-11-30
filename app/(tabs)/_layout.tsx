@@ -43,7 +43,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="(topics)"
         options={{
-          title: 'Topics',
+          title: 'Payments',
           tabBarIcon: ({ color }) => <FontAwesome5 name="money-check-alt" size={24} color={color} />,
         }}
       />

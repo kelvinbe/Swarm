@@ -10,6 +10,11 @@ import TopicSummaryListCard from '../components/Organisims/Topics/TopicsSummaryL
 import { Image, ImageProps } from "@rneui/base";
 import CarouselCards from '../components/Organisims/Carousel/CarouselCards';
 import axios from 'axios';
+import { PEXEL_API_KEY } from "@env";
+import { BottomSheet } from "@rneui/base";
+import PaymentDetailsCard from '../components/Molecules/Cards/PaymentDetailsCard';
+
+
 
 
 
@@ -26,69 +31,24 @@ const Payments = () => {
   const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
   const maxLength = 16; // Set your desired maximum length
   const separatorLength = 4; // Set the length after which you want to insert a space
-
+  const [isVisible, setIsVisible] = useState(false)
 
 
   const { description, baths, price, image, bedrooms, propertyId } = params;
 
 
   // Check if the font is loaded before rendering the component
-
-
-const options = {
-  method: 'GET',
-  url: 'https://realtor.p.rapidapi.com/properties/v3/get-photos',
-  params: {
-    property_id: propertyId
-  },
-  headers: {
-    'X-RapidAPI-Key': '66f5d56857msh6afbfded9d0045ap13f7ffjsn162c3d12f50a',
-    'X-RapidAPI-Host': 'realtor.p.rapidapi.com'
-  }
-};
-
-
-const fetchImagesOnID = async () => {
-
-try {
-  setLoading(true)
-	const response = await axios.request(options);
-  if(response){
-    const filteredData = response?.data?.data?.home_search?.results[0]?.photos
-    return filteredData
-  }else{
-    console.error('Invalid API response', response)
-    return []
-  }
-} catch (error) {
-	console.error(error);
-} finally {
-  setLoading(false)
-}
-
-}
-
-
-
-
-
-
-  useEffect(() => {
-
-    const FetchDataAndSetState = async () => {
-      const fetchedImages = await fetchImagesOnID()
-      setImages(fetchedImages)
-      setLoading(false)
-    }
-
-    FetchDataAndSetState()
-  }, [propertyId])
-
-
   // Function to handle payment
   const handlePayment = () => {
     // Add your payment logic here
-    console.log('Processing payment...');
+
+    if(cvv !== '' && expiryDate !== '' && cardNumber !== ''){
+    setIsVisible(true)
+
+    }else{
+      return
+    }
+
   };
   useEffect(() => {
     // Add keyboard event listeners
@@ -150,6 +110,39 @@ try {
     setCVV(sanitizedText);
   };
 
+  const onBackdropPress = () => {
+    setIsVisible(false);
+  };
+
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      const API_KEY = PEXEL_API_KEY ;
+      const apiUrl = `https://api.pexels.com/v1/search?query=house%20interior&per_page=10`;
+      try {
+        setLoading(true)
+        const response = await axios.get(apiUrl, {
+          headers: {
+            Authorization: API_KEY,
+          },
+        });
+
+        if (response.status === 200) {
+          const data = response.data;
+          const fetchedImages = data.photos;
+          setImages(fetchedImages);
+          setLoading(false)
+        } else {
+          console.error(`Error: ${response.status} - ${response.statusText}`);
+        }
+      } catch (error) {
+        console.error('Error fetching images:', error);
+      }
+    };
+
+    fetchImages();
+  }, [propertyId]); 
+
 
 
   return (
@@ -158,7 +151,7 @@ try {
     behavior="padding"
     keyboardVerticalOffset={Platform.OS === 'ios' ? 64 : 0}>
       <ScrollView>
-    <View style={styles.container}>
+    <View testID='payments-page' style={styles.container}>
     <View style={{flex: 1}}>
       <Text style={styles.headerText}>Purchase Property</Text>
     </View>
@@ -216,6 +209,14 @@ try {
       </TouchableOpacity> }
     </View>
     </ScrollView>
+    <BottomSheet  backdropStyle={styles.bottomSheet}  isVisible={isVisible} onBackdropPress={onBackdropPress}>
+          <PaymentDetailsCard
+            cvv={cvv}
+            accountNumber={cardNumber}
+            expiryDate={expiryDate}
+            price={300000}
+          />
+        </BottomSheet>
     </KeyboardAvoidingView>
     );
 };
@@ -283,5 +284,8 @@ const useStyles = makeStyles((theme) =>({
     fontWeight: 'bold',
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  bottomSheet: {
+    height: '50%'
   }
 }));
