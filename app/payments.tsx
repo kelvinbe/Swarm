@@ -13,7 +13,7 @@ import axios from 'axios';
 import { PEXEL_API_KEY } from "@env";
 import { BottomSheet } from "@rneui/base";
 import PaymentDetailsCard from '../components/Molecules/Cards/PaymentDetailsCard';
-
+import { images } from '../data';
 
 
 
@@ -24,7 +24,7 @@ const Payments = () => {
   const [expiryDate, setExpiryDate] = useState('');
   const [cvv, setCVV] = useState('');
   const [cardHolderName, setCardHolderName] = useState("John Doe")
-  const [images, setImages] = useState([])
+  // const [images, setImages] = useState([])
   const [loading, setLoading] = useState(false)
   const styles = useStyles();
   const params = useLocalSearchParams();
@@ -115,33 +115,33 @@ const Payments = () => {
   };
 
 
-  useEffect(() => {
-    const fetchImages = async () => {
-      const API_KEY = PEXEL_API_KEY ;
-      const apiUrl = `https://api.pexels.com/v1/search?query=house%20interior&per_page=10`;
-      try {
-        setLoading(true)
-        const response = await axios.get(apiUrl, {
-          headers: {
-            Authorization: API_KEY,
-          },
-        });
+  // useEffect(() => {
+  //   const fetchImages = async () => {
+  //     const API_KEY = PEXEL_API_KEY ;
+  //     const apiUrl = `https://api.pexels.com/v1/search?query=house%20interior&per_page=10`;
+  //     try {
+  //       setLoading(true)
+  //       const response = await axios.get(apiUrl, {
+  //         headers: {
+  //           Authorization: API_KEY,
+  //         },
+  //       });
 
-        if (response.status === 200) {
-          const data = response.data;
-          const fetchedImages = data.photos;
-          setImages(fetchedImages);
-          setLoading(false)
-        } else {
-          console.error(`Error: ${response.status} - ${response.statusText}`);
-        }
-      } catch (error) {
-        console.error('Error fetching images:', error);
-      }
-    };
+  //       if (response.status === 200) {
+  //         const data = response.data;
+  //         const fetchedImages = data.photos;
+  //         setImages(fetchedImages);
+  //         setLoading(false)
+  //       } else {
+  //         console.error(`Error: ${response.status} - ${response.statusText}`);
+  //       }
+  //     } catch (error) {
+  //       console.error('Error fetching images:', error);
+  //     }
+  //   };
 
-    fetchImages();
-  }, [propertyId]); 
+  //   fetchImages();
+  // }, [propertyId]); 
 
 
 

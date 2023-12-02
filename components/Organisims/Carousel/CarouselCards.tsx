@@ -2,6 +2,8 @@ import React, {useState} from 'react'
 import { View } from "react-native"
 import Carousel, {Pagination} from 'react-native-snap-carousel'
 import CarouselCardItem, { SLIDER_WIDTH, ITEM_WIDTH } from './Carousel'
+import { images } from '../../../data'
+
 
 
 
@@ -16,16 +18,15 @@ const CarouselCards = (props: IProps) => {
   const [index, setIndex] = useState(0)
   const {data} = props
 
-const newArray = data.map((photo) => {
-    return {title: photo.alt, imgUrl: photo.src.medium}
-})
+
+
   return (
     <View>
     <Carousel
         layout="tinder"
         layoutCardOffset={9}
         ref={isCarousel}
-        data={newArray}
+        data={data}
         renderItem={CarouselCardItem}
         sliderWidth={SLIDER_WIDTH}
         itemWidth={ITEM_WIDTH}

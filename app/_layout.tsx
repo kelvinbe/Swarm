@@ -164,7 +164,7 @@ function RootLayoutNav() {
                   ),
                 }}
               />
-              <Stack.Screen
+              {/* <Stack.Screen
                 name="topics"
                 options={{
                   header: (props) => (
@@ -173,7 +173,7 @@ function RootLayoutNav() {
                     </View>
                   ),
                 }}
-              />
+              /> */}
             </Stack>
           </NavigationThemeProvider>
         </ThemeProvider>

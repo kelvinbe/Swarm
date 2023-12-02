@@ -129,8 +129,7 @@ export default HomeView;
 const useStyles = makeStyles((theme) => ({
   container: { 
     backgroundColor: theme.colors.background,
-    padding: 15,
-    flex: 1,
+    padding: 15,    flex: 1,
   },
   lottie: {
     width: 100,
