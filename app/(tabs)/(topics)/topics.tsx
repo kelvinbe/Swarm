@@ -9,10 +9,11 @@ import { BottomSheet } from "@rneui/base";
 import { useState } from "react";
 import IconButton from "../../../components/Atoms/Buttons/IconButton";
 import ActionButton from "../../../components/Atoms/Buttons/ActionButton";
-import { Link, useRouter } from "expo-router";
+import { useNavigation, useRouter, useLocalSearchParams } from "expo-router";
 import TopicList from "./topic-list";
 import { useTheme } from "@rneui/themed";
 import ModalScreen from "../../modal";
+import DisplayCard from "../../../components/Molecules/Cards/DisplayCard";
 
 
 const Topicss = [
@@ -67,6 +68,8 @@ const Topics = () => {
   const [modalVisible, setModalVisible] = useState(false)
   const {theme} = useTheme()
   const {push} = useRouter()
+  const params = useLocalSearchParams();
+
 
   const handleCategoryFilter = () => {};
   const handlePopularityFilter = () => {};
@@ -92,12 +95,17 @@ const Topics = () => {
     push('home')
   
 };
+
+const {cvv, cardNumber, expiryDate} = params
+
+
+
   return (
     <ScrollView style={{ padding: 15, backgroundColor: theme.colors.background }}>
       <View style={{ paddingBottom: 20 }}>
 
         <View>
-          <AvailableTopics Topics={Topicss} />
+          <DisplayCard cardNumber={cardNumber} cvv={cvv} expDate={expiryDate} amount={30000} status={'Paid'}/>
         </View>
 
         <View style={{ paddingTop: 40 }}>

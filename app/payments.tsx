@@ -17,7 +17,6 @@ import { images } from '../data';
 
 
 
-
 const Payments = () => {
   // State to hold the card details
   const [cardNumber, setCardNumber] = useState('');
@@ -39,8 +38,13 @@ const Payments = () => {
 
   // Check if the font is loaded before rendering the component
   // Function to handle payment
-  const handlePayment = () => {
-    // Add your payment logic here
+
+
+
+
+  const handlePayment = async () => { 
+
+    
 
     if(cvv !== '' && expiryDate !== '' && cardNumber !== ''){
     setIsVisible(true)
@@ -156,12 +160,10 @@ const Payments = () => {
       <Text style={styles.headerText}>Purchase Property</Text>
     </View>
   {loading ? <ActivityIndicator size={"large"} /> :
-  <View style={{flex: 4}}>
+    <View style={{flex: 3}}>
     <CarouselCards  data={images}/>
     </View>}
       <View style={styles.cardContainer}>
-        <View>
-      </View>
       <View>
         <Text style={styles.descriptionText}>Description : {description === 'essentials' ? 'Pent House Apartment': 'Bungalow House'}</Text>
         <Text style={styles.descriptionText}>Baths: {baths}</Text>
@@ -212,7 +214,7 @@ const Payments = () => {
     <BottomSheet  backdropStyle={styles.bottomSheet}  isVisible={isVisible} onBackdropPress={onBackdropPress}>
           <PaymentDetailsCard
             cvv={cvv}
-            accountNumber={cardNumber}
+            cardNumber={cardNumber}
             expiryDate={expiryDate}
             price={300000}
           />
@@ -274,7 +276,8 @@ const useStyles = makeStyles((theme) =>({
   cardContainer: {
     width: '100%',
     flexDirection: 'column',
-    marginBottom: 10
+    marginBottom: 10,
+    marginTop: 30
   },
   descriptionText: {
     fontWeight: 'bold'

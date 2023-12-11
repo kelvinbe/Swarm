@@ -18,7 +18,9 @@ const CarouselCards = (props: IProps) => {
   const [index, setIndex] = useState(0)
   const {data} = props
 
-
+  const newData = data.map((d) => {
+    return {imgUrl: d.imgUrl, title: d.title}
+  })
 
   return (
     <View>
@@ -26,7 +28,7 @@ const CarouselCards = (props: IProps) => {
         layout="tinder"
         layoutCardOffset={9}
         ref={isCarousel}
-        data={data}
+        data={newData}
         renderItem={CarouselCardItem}
         sliderWidth={SLIDER_WIDTH}
         itemWidth={ITEM_WIDTH}
