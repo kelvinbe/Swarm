@@ -25,6 +25,8 @@ import {
   AlertNotificationRoot,
   Toast,
 } from "react-native-alert-notification";
+import { Session } from '@supabase/supabase-js'
+
 
 const HomeView = () => {
   const { theme } = useTheme();
@@ -35,6 +37,8 @@ const HomeView = () => {
   const [loading, setLoading] = useState(false);
   const [dbData, setDBData] = useState([]);
   const styles = useStyles();
+  const [session, setSession] = useState<Session | null>(null)
+
 
   const { push } = useRouter();
   const onFilterApply = () => {
@@ -71,6 +75,18 @@ const HomeView = () => {
       },
     },
   };
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session)
+    })
+
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session)
+    })
+  }, [])
+
+  console.log('session', session)
 
   const fetchData = async (search: string) => {
     try {

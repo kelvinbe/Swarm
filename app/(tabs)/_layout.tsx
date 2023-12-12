@@ -50,7 +50,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="(swarms)"
         options={{
-          title: 'My Swarms',
+          title: 'My Properties',
           tabBarIcon: ({ color }) => <TabBarIcon name="list-alt" color={color} />,
         }}
       />
