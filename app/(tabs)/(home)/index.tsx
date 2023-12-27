@@ -76,17 +76,7 @@ const HomeView = () => {
     },
   };
 
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session)
-    })
 
-    supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session)
-    })
-  }, [])
-
-  console.log('session', session)
 
   const fetchData = async (search: string) => {
     try {

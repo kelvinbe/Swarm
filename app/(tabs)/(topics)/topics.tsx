@@ -1,19 +1,11 @@
-import { View, Text, ScrollView } from "react-native";
-import AvailableTopics from "../../../components/Organisims/Topics/AvailableTopics";
-import SelectableTopicCard from "../../../components/Molecules/Cards/SelectableTopicCard";
-import TopicCard from "../../../components/Molecules/Cards/TopicCard";
-import TopicSummaryList from "../../../components/Organisims/Topics/SummaryList";
-import SearchAndFilter from "../../../components/Molecules/Topics/SearchAndFilter";
-import FilterCard from "../../../components/Molecules/Cards/FilterCard";
-import { BottomSheet } from "@rneui/base";
+import { View, Text, ScrollView, StyleSheet } from "react-native";
 import { useState } from "react";
-import IconButton from "../../../components/Atoms/Buttons/IconButton";
 import ActionButton from "../../../components/Atoms/Buttons/ActionButton";
-import { useNavigation, useRouter, useLocalSearchParams } from "expo-router";
-import TopicList from "./topic-list";
-import { useTheme } from "@rneui/themed";
-import ModalScreen from "../../modal";
+import {  useRouter, useLocalSearchParams } from "expo-router";
+import { useTheme, makeStyles } from "@rneui/themed";
 import DisplayCard from "../../../components/Molecules/Cards/DisplayCard";
+import Charts from "../../../components/Organisims/Charts/Charts";
+
 
 
 const Topicss = [
@@ -69,6 +61,8 @@ const Topics = () => {
   const {theme} = useTheme()
   const {push} = useRouter()
   const params = useLocalSearchParams();
+  const styles = useStyles();
+
 
 
   const handleCategoryFilter = () => {};
@@ -101,31 +95,46 @@ const {cvv, cardNumber, expiryDate} = params
 
 
   return (
-    <ScrollView style={{ padding: 15, backgroundColor: theme.colors.background }}>
+    <ScrollView style={styles.container}>
       <View style={{ paddingBottom: 20 }}>
 
-        <View>
-          <DisplayCard cardNumber={cardNumber} cvv={cvv} expDate={expiryDate} amount={30000} status={'Paid'}/>
+      {cvv === undefined ?<><Text>You dont have any payments.</Text><Text> Click on a property and make a payment</Text></> : (<><View>
+          <DisplayCard cardNumber={cardNumber} cvv={cvv} expDate={expiryDate} amount={30000} status={'Paid'} />
         </View>
 
-        <View style={{ paddingTop: 40 }}>
-          <ActionButton onPress={onContinueTap} fullWidth>
-            Continue
-          </ActionButton>
+        <View>
+        <Charts />
         </View>
-        <BottomSheet isVisible={isVisible} onBackdropPress={onBackdropPress}>
-          <FilterCard
-            handleCategoryFilter={handleCategoryFilter}
-            handlePopularityFilter={handlePopularityFilter}
-            handleRecencyFilter={handleRecencyFilter}
-            handleTopicsFilter={handleTopicsFilter}
-            handleSwarmLevelFilter={handleSwarmLevelFilter}
-            onDonePress={onFilterApply}
-          />
-        </BottomSheet>
+        
+        <View style={styles.buttonStyles}>
+            <ActionButton onPress={onContinueTap} fullWidth>
+              Continue
+            </ActionButton>
+          </View></>)}
       </View>
     </ScrollView>
   );
 };
 
 export default Topics;
+
+
+const useStyles = makeStyles((theme) => ({
+  container: {
+    padding: 15, 
+    backgroundColor: theme.colors.background,
+    flex: 1
+
+  },
+  charts: {
+    flex: 2
+
+  },
+  buttonStyles: {
+    paddingTop: 40,
+    flex: 1
+  }
+
+
+
+}))
