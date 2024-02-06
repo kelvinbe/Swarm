@@ -4,13 +4,8 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, KeyboardAvoidingView, Platform, Keyboard, ScrollView, ActivityIndicator } from 'react-native';
 import VisaCard from '../components/Molecules/Cards/VisaCard';
 import { makeStyles } from "@rneui/themed";
-import { useFonts, Lato_700Bold } from '@expo-google-fonts/lato';
-import { useNavigation, useRouter, useLocalSearchParams } from "expo-router";
-import TopicSummaryListCard from '../components/Organisims/Topics/TopicsSummaryListCard';
-import { Image, ImageProps } from "@rneui/base";
+import { useLocalSearchParams } from "expo-router";
 import CarouselCards from '../components/Organisims/Carousel/CarouselCards';
-import axios from 'axios';
-import { PEXEL_API_KEY } from "@env";
 import { BottomSheet } from "@rneui/base";
 import PaymentDetailsCard from '../components/Molecules/Cards/PaymentDetailsCard';
 import { images } from '../data';
@@ -34,11 +29,6 @@ const Payments = () => {
 
 
   const { description, baths, price, image, bedrooms, propertyId } = params;
-
-
-  // Check if the font is loaded before rendering the component
-  // Function to handle payment
-
 
 
 
@@ -117,36 +107,6 @@ const Payments = () => {
   const onBackdropPress = () => {
     setIsVisible(false);
   };
-
-
-  // useEffect(() => {
-  //   const fetchImages = async () => {
-  //     const API_KEY = PEXEL_API_KEY ;
-  //     const apiUrl = `https://api.pexels.com/v1/search?query=house%20interior&per_page=10`;
-  //     try {
-  //       setLoading(true)
-  //       const response = await axios.get(apiUrl, {
-  //         headers: {
-  //           Authorization: API_KEY,
-  //         },
-  //       });
-
-  //       if (response.status === 200) {
-  //         const data = response.data;
-  //         const fetchedImages = data.photos;
-  //         setImages(fetchedImages);
-  //         setLoading(false)
-  //       } else {
-  //         console.error(`Error: ${response.status} - ${response.statusText}`);
-  //       }
-  //     } catch (error) {
-  //       console.error('Error fetching images:', error);
-  //     }
-  //   };
-
-  //   fetchImages();
-  // }, [propertyId]); 
-
 
 
   return (

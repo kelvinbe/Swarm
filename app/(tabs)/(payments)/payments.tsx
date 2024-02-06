@@ -5,7 +5,7 @@ import {  useRouter, useLocalSearchParams } from "expo-router";
 import { useTheme, makeStyles } from "@rneui/themed";
 import DisplayCard from "../../../components/Molecules/Cards/DisplayCard";
 import Charts from "../../../components/Organisims/Charts/Charts";
-
+import React from 'react'
 
 
 const Topicss = [

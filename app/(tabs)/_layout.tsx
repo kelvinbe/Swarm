@@ -3,6 +3,7 @@ import { Tabs } from 'expo-router';
 import { View, useColorScheme } from 'react-native';
 import { Feather, Ionicons, Octicons, FontAwesome5 } from '@expo/vector-icons';
 import { useTheme } from '@rneui/themed';
+import { useFonts } from 'expo-font';
 
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
@@ -11,7 +12,7 @@ function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome>['name'];
   color: string;
 }) {
-  return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
+  return <FontAwesome5 size={28} style={{ marginBottom: -3 }} {...props} />;
 }
 
 export default function TabLayout() {
@@ -25,13 +26,6 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen
-        name="index"
-        options={{
-          headerShown: false,
-          tabBarButton: (props)=> null
-        }}
-      />
-      <Tabs.Screen
         name="(home)"
         options={{
           title: 'Home',
@@ -41,14 +35,14 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="(topics)"
+        name="(payments)"
         options={{
           title: 'Payments',
           tabBarIcon: ({ color }) => <FontAwesome5 name="money-check-alt" size={24} color={color} />,
         }}
       />
       <Tabs.Screen
-        name="(swarms)"
+        name="(properties)"
         options={{
           title: 'My Properties',
           tabBarIcon: ({ color }) => <TabBarIcon name="list-alt" color={color} />,

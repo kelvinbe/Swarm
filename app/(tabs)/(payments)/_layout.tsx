@@ -3,7 +3,7 @@ import { Stack } from "expo-router";
 const TopicsLayout = ()=>{
     return(
         <Stack>
-            <Stack.Screen name="topics" options={{ headerShown: false}} />
+            <Stack.Screen name="payments" options={{ headerShown: false}} />
             <Stack.Screen name="choose-topic" options={{}} />
             <Stack.Screen name="questions" options={{}}/>
             <Stack.Screen name="select-topic" options={{}}/>

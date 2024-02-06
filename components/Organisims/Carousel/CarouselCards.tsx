@@ -4,11 +4,6 @@ import Carousel, {Pagination} from 'react-native-snap-carousel'
 import CarouselCardItem, { SLIDER_WIDTH, ITEM_WIDTH } from './Carousel'
 import { images } from '../../../data'
 
-
-
-
-
-
   interface IProps {
   data : string[]
 }

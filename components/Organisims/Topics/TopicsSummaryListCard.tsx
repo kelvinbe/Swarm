@@ -1,4 +1,3 @@
-import { View, Text, TouchableOpacity } from "react-native";
 import SummaryCard from "../../Molecules/Cards/SummaryCard";
 import { makeStyles } from "@rneui/themed";
 import {
@@ -10,6 +9,9 @@ import {
 import { Rating, AirbnbRating } from "react-native-ratings";
 import { Link, useRouter } from "expo-router";
 import _ from "lodash";
+import { View, Text, TouchableOpacity } from "react-native";
+import React from 'react'
+
 
 interface IProps {
   title: string;
@@ -50,7 +52,7 @@ const TopicSummaryListCard = (props: IProps) => {
     );
 
     if (isValidData) {
-      router.push({ pathname: "/payments", params: pass });
+      router.push({ pathname: "/payments-track", params: pass });
     } else {
       console.error("Invalid data in pass object");
     }

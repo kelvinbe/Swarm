@@ -27,7 +27,7 @@ const VisaCard = ({ cardNumber, expiryDate, cardHolderName }) => {
 const styles = StyleSheet.create({
   cardContainer: {
     padding: 20,
-    backgroundColor: '#4CAF50', // Replace with your card background color
+    backgroundColor: 'blue', // Replace with your card background color
     borderRadius: 10,
     width: '100%',
   },

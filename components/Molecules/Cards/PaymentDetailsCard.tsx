@@ -38,7 +38,7 @@ const PaymentDetailsCard = ({ cardNumber, expiryDate, cvv, price }) => {
 
     setTimeout(() => {
       setIsLoading(false);
-      router.push({ pathname: "/topics", params: pass });
+      router.push({ pathname: "/payments", params: pass });
     }, 3000);
   };
 

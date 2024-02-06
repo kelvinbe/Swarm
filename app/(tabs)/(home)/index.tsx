@@ -1,3 +1,4 @@
+import React from 'react'
 import {
   View,
   ScrollView,
@@ -25,8 +26,7 @@ import {
   AlertNotificationRoot,
   Toast,
 } from "react-native-alert-notification";
-import { Session } from '@supabase/supabase-js'
-
+import { Session } from "@supabase/supabase-js";
 
 const HomeView = () => {
   const { theme } = useTheme();
@@ -37,8 +37,7 @@ const HomeView = () => {
   const [loading, setLoading] = useState(false);
   const [dbData, setDBData] = useState([]);
   const styles = useStyles();
-  const [session, setSession] = useState<Session | null>(null)
-
+  const [session, setSession] = useState<Session | null>(null);
 
   const { push } = useRouter();
   const onFilterApply = () => {
@@ -75,8 +74,6 @@ const HomeView = () => {
       },
     },
   };
-
-
 
   const fetchData = async (search: string) => {
     try {
@@ -124,7 +121,13 @@ const HomeView = () => {
   return (
     <View style={styles.container}>
       <ScrollView style={{ padding: 15 }}>
-        {loading ? <View testID="loading-indicator" style={styles.loader}><ActivityIndicator size={"large"} /></View>: <SummaryList data={dataL} />}
+        {loading ? (
+          <View testID="loading-indicator" style={styles.loader}>
+            <ActivityIndicator size={"large"} />
+          </View>
+        ) : (
+          <SummaryList data={dataL} />
+        )}
       </ScrollView>
     </View>
   );
@@ -133,9 +136,10 @@ const HomeView = () => {
 export default HomeView;
 
 const useStyles = makeStyles((theme) => ({
-  container: { 
+  container: {
     backgroundColor: theme.colors.background,
-    padding: 15,    flex: 1,
+    padding: 15,
+    flex: 1,
   },
   lottie: {
     width: 100,

@@ -1,9 +1,8 @@
-module.exports = function (api) {
+module.exports = function(api) {
   api.cache(true);
   return {
-    presets: ["babel-preset-expo", 'module:metro-react-native-babel-preset'],
+    presets: ['babel-preset-expo'],
     plugins: [
-      require.resolve("expo-router/babel"),
       [
         'module:react-native-dotenv',
         {
@@ -12,8 +11,7 @@ module.exports = function (api) {
           path: '.env',
         },
       ],
-      ['react-native-reanimated/plugin'],
-
+      'react-native-reanimated/plugin',
     ],
   };
 };

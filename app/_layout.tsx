@@ -155,7 +155,7 @@ function RootLayoutNav() {
                 }}
               />
               <Stack.Screen
-                name="payments"
+                name="payments-track"
                 options={{
                   header: (props) => (
                     <View style={{ backgroundColor: "#fff", paddingVertical: 30 }}>
@@ -164,16 +164,6 @@ function RootLayoutNav() {
                   ),
                 }}
               />
-              {/* <Stack.Screen
-                name="topics"
-                options={{
-                  header: (props) => (
-                    <View style={{ backgroundColor: "#fff", paddingVertical: 30 }}>
-                      <Logo width={70} height={70} />
-                    </View>
-                  ),
-                }}
-              /> */}
             </Stack>
           </NavigationThemeProvider>
         </ThemeProvider>

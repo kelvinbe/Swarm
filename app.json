@@ -13,7 +13,8 @@
       "backgroundColor": "#ffffff"
     },
     "plugins": [
-      "@config-plugins/detox"
+      "@config-plugins/detox",
+      "expo-font"
     ],
     "assetBundlePatterns": [
       "**/*"
@@ -23,7 +24,7 @@
       "bundleIdentifier": "com.kelvinkb.swarm"
     },
     "android": {
-      "versionCode": 19,
+      "versionCode": 21,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/appstore.png",
         "backgroundColor": "#ffffff"
