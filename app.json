@@ -24,7 +24,7 @@
       "bundleIdentifier": "com.kelvinkb.swarm"
     },
     "android": {
-      "versionCode": 21,
+      "versionCode": 22,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/appstore.png",
         "backgroundColor": "#ffffff"

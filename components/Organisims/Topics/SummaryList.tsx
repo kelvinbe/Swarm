@@ -14,9 +14,6 @@ const SummaryList = (props: IProps) => {
   useEffect(() => {}, []);
 
 
-  const arr = {
-    img: images
-  }
 
   const newArr = data.map((item, index) => {
 

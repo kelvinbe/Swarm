@@ -85,7 +85,7 @@ const useStyles = makeStyles((theme) => ({
   headers: {
     display: "flex",
     flexDirection: "column",
-    marginLeft: -160,
+    marginLeft: 160,
   },
   cards: {
     display: "flex",

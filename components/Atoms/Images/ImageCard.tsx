@@ -17,19 +17,19 @@ const  ImageCard = (props: IProps) => {
     
   }, [imageUrl])
 
-  console.log('imagaage',imageUrl)
 
   return (
-    <View style={{justifyContent: 'center',alignItems: 'center',borderBottomLeftRadius: 20, borderTopLeftRadius: 20, }}>
+    <View style={{marginLeft: 0, justifyContent: 'center', alignItems: 'center'}}>
       <Image
         source={{uri: imageUrl}}
         style={{
           width: width ? width : "100%",
-          height: height ? height : 130,
-          borderRadius: borderRadius ? borderRadius : 5,
+          height: height ? height : 120,
+          borderRadius: borderRadius ? borderRadius : 5, 
           aspectRatio: 1,
+          justifyContent: 'center',
         }}
-        resizeMode="contain"
+        resizeMode="cover"
       />
     </View>
   );

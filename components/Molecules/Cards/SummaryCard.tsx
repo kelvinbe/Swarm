@@ -1,3 +1,4 @@
+import React from 'react'
 import { View } from "../../Themed";
 import { Text, TouchableOpacity } from "react-native";
 import ImageCard from "../../Atoms/Images/ImageCard";
@@ -35,19 +36,17 @@ const SummaryCard = (props: Props) => {
   return (
     <TouchableOpacity onPress={onPress} style={styles.container}>
       <View style={styles.innerContainer}>
-        <View>
           <ImageCard
             imageUrl={imageUri}
-            borderRadius={30}
+            borderRadius={20}
           />
-        </View>
         <View style={styles.headers}>
           <Text
             style={[styles.textStyles, { fontWeight: "bold", fontSize: 15 }]}
           >
             {description === "essentials"
               ? "Pent House Apartment"
-              : "Bungalow House"}
+              : "Bungalow House Rent"}
           </Text>
           <View style={styles.textStyles}>
             <View style={styles.icons}>
