@@ -27,6 +27,7 @@ import {
   Toast,
 } from "react-native-alert-notification";
 import { Session } from "@supabase/supabase-js";
+import Onboard from '../../../components/Organisims/Onboarding/Onboard';
 
 const HomeView = () => {
   const { theme } = useTheme();
@@ -119,17 +120,19 @@ const HomeView = () => {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <ScrollView style={{ padding: 15 }}>
-        {loading ? (
-          <View testID="loading-indicator" style={styles.loader}>
-            <ActivityIndicator size={"large"} />
-          </View>
-        ) : (
-          <SummaryList data={dataL} />
-        )}
-      </ScrollView>
-    </View>
+    // <View style={styles.container}>
+    //   <ScrollView style={{ padding: 15 }}>
+    //     {loading ? (
+    //       <View testID="loading-indicator" style={styles.loader}>
+    //         <ActivityIndicator size={"large"} />
+    //       </View>
+    //     ) : (
+    //       <SummaryList data={dataL} />
+    //     )}
+    //   </ScrollView>
+    // </View>
+
+    <Onboard />
   );
 };
 
