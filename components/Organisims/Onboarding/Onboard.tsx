@@ -15,12 +15,13 @@ import Animated, {
   interpolate,
   Extrapolation,
 } from "react-native-reanimated";
-import React from "react";
+import React, { useEffect } from "react";
 import data from "../../../dataa/data.js";
 import Pagination from "../../Organisims/Pagination/Pagination.tsx";
 import CustomButton from "../../Atoms/Buttons/CustomButton.tsx";
 
-const Onboard = () => {
+
+const Onboard = ({setIsFirstTime}) => {
   const x = useSharedValue(0);
   const flatListIndex = useSharedValue(0)
   const flatListRef = useAnimatedRef(null)
@@ -100,6 +101,9 @@ const Onboard = () => {
           ],
         };
       });
+
+
+
   
 
     return (
@@ -116,7 +120,7 @@ const Onboard = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Animated.FlatList
-      ref={flatListRef}
+        ref={flatListRef}
         onScroll={onScroll}
         data={data}
         keyExtractor={(item) => item.id}
@@ -132,7 +136,7 @@ const Onboard = () => {
       />
       <View style={styles.bottomContainer}> 
         <Pagination data={data} x={x} screenWidth={SCREEN_WIDTH}/>
-        <CustomButton flatListRef={flatListRef} flatListIndex={flatListIndex} dataLength={data.length} />
+        <CustomButton setIsFirstTime={setIsFirstTime} flatListRef={flatListRef} flatListIndex={flatListIndex} dataLength={data.length} />
       </View>
     </SafeAreaView>
   );

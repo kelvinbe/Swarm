@@ -1,12 +1,14 @@
 import { StyleSheet, Text, View, TouchableWithoutFeedback, Image } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import Animated, {
     useAnimatedStyle,
     withSpring,
     withTiming
 } from 'react-native-reanimated'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const CustomButton = ({flatListRef, flatListIndex, dataLength}) => {
+
+const CustomButton = ({flatListRef, flatListIndex, dataLength, setIsFirstTime}) => {
 
     const buttonAnimationStyle = useAnimatedStyle(() => {
         return {
@@ -31,25 +33,38 @@ const CustomButton = ({flatListRef, flatListIndex, dataLength}) => {
         }
     })
 
+    useEffect(() => {
+        async function getFirstTime() {
+        const firstTime = await AsyncStorage.getItem("firstTime");
+        }
+
+        getFirstTime()
+
+    }, [])
 
 
 
   return (
-    <TouchableWithoutFeedback onPress={() => {
+    <TouchableWithoutFeedback onPress={async () => {
         if(flatListIndex.value < dataLength -1){
             flatListRef?.current?.scrollToIndex({index: flatListIndex.value + 1})
         }else{
-            console.log('NAVIGATE TO NEXT SCREEN')
+            const firstTime = await AsyncStorage.getItem("firstTime");
+            if(firstTime === 'true'){
+                await AsyncStorage.setItem('firstTime', 'true')
+                setIsFirstTime(true);
+                console.log('NAVIGATE TO NEXT SCREEN')
+            }
         }
     }}>
-      <Animated.View style={[styles.container, buttonAnimationStyle]}>
+    <Animated.View style={[styles.container, buttonAnimationStyle]}>
         <Animated.Text style={[styles.textButton, textAnimationStyle]}>
             Get Started
         </Animated.Text>
         <Animated.Image source={require('../../../assets/onboardimg/ArrowIcon.png')} style={[styles.arrow, arrowAnimationStyle]} />
-      </Animated.View>
+    </Animated.View>
     </TouchableWithoutFeedback>
-  )
+)
 }
 
 export default CustomButton

@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import {
   DarkTheme,
@@ -14,6 +15,8 @@ import { ThemeProvider, useTheme } from "@rneui/themed";
 import { darkTheme, lightTheme } from "../rn-elements";
 import { StatusBar } from "expo-status-bar";
 import Logo from "../components/Atoms/Brand/Logo";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import Onboard from "../components/Organisims/Onboarding/Onboard";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -30,11 +33,31 @@ export default function RootLayout() {
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
     ...FontAwesome.font,
   });
+  const [isFirstTime, setIsFirstTime] = useState(false)
 
   // Expo Router uses Error Boundaries to catch errors in the navigation tree.
   useEffect(() => {
     if (error) throw error;
   }, [error]);
+
+  async function checkFirstTime() {
+    try {
+      const value = await AsyncStorage.getItem("@firstTime");
+      const firstTime = await AsyncStorage.getItem("firstTime");
+      if (value === null && firstTime === null) {
+        await AsyncStorage.setItem("@firstTime", "true");
+        await AsyncStorage.setItem("firstTime", "false");
+      }
+    } catch (error) {
+      console.error("Error reading or setting flag in AsyncStorage:", error);
+    }
+  }
+
+  console.log('isFirstTime', isFirstTime)
+
+  useEffect(() => {
+    checkFirstTime();
+  }, [])
 
   useEffect(()=>{
     if(loaded){
@@ -44,7 +67,8 @@ export default function RootLayout() {
   return (
     <>
       {/* Keep the splash screen open until the assets have loaded. In the future, we should just support async font loading with a native version of font-display. */}
-      {loaded && <RootLayoutNav />}
+      {loaded && !isFirstTime && <Onboard setIsFirstTime={setIsFirstTime} />}
+      {loaded  && isFirstTime && <RootLayoutNav />}
       <StatusBar style={Platform.OS === "ios" ? "light" : "auto"} />
     </>
   );
