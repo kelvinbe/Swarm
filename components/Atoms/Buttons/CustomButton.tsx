@@ -10,6 +10,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const CustomButton = ({flatListRef, flatListIndex, dataLength, setIsFirstTime}) => {
 
+
     const buttonAnimationStyle = useAnimatedStyle(() => {
         return {
             width: flatListIndex.value === dataLength -1 ? withSpring(140): withSpring(60),
@@ -33,28 +34,16 @@ const CustomButton = ({flatListRef, flatListIndex, dataLength, setIsFirstTime}) 
         }
     })
 
-    useEffect(() => {
-        async function getFirstTime() {
-        const firstTime = await AsyncStorage.getItem("firstTime");
-        }
-
-        getFirstTime()
-
-    }, [])
-
 
 
   return (
     <TouchableWithoutFeedback onPress={async () => {
         if(flatListIndex.value < dataLength -1){
             flatListRef?.current?.scrollToIndex({index: flatListIndex.value + 1})
+            
         }else{
-            const firstTime = await AsyncStorage.getItem("firstTime");
-            if(firstTime === 'true'){
-                await AsyncStorage.setItem('firstTime', 'true')
-                setIsFirstTime(true);
-                console.log('NAVIGATE TO NEXT SCREEN')
-            }
+            await AsyncStorage.setItem('hasOnboarded', 'true')
+            setIsFirstTime(true)
         }
     }}>
     <Animated.View style={[styles.container, buttonAnimationStyle]}>

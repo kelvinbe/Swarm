@@ -136,7 +136,7 @@ const Onboard = ({setIsFirstTime}) => {
       />
       <View style={styles.bottomContainer}> 
         <Pagination data={data} x={x} screenWidth={SCREEN_WIDTH}/>
-        <CustomButton setIsFirstTime={setIsFirstTime} flatListRef={flatListRef} flatListIndex={flatListIndex} dataLength={data.length} />
+        <CustomButton  setIsFirstTime={setIsFirstTime} flatListRef={flatListRef} flatListIndex={flatListIndex} dataLength={data.length} />
       </View>
     </SafeAreaView>
   );

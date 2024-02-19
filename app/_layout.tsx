@@ -17,6 +17,7 @@ import { StatusBar } from "expo-status-bar";
 import Logo from "../components/Atoms/Brand/Logo";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Onboard from "../components/Organisims/Onboarding/Onboard";
+import {useNavigation} from 'expo-router'
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -28,51 +29,66 @@ export const unstable_settings = {
   initialRouteName: "(tabs)",
 };
 SplashScreen.preventAutoHideAsync()
+
+
+
+
 export default function RootLayout() {
   const [loaded, error] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
     ...FontAwesome.font,
   });
-  const [isFirstTime, setIsFirstTime] = useState(false)
 
-  // Expo Router uses Error Boundaries to catch errors in the navigation tree.
+  const [isOnboarded, setIsOnboarded] = useState(false);
+
   useEffect(() => {
     if (error) throw error;
   }, [error]);
 
-  async function checkFirstTime() {
-    try {
-      const value = await AsyncStorage.getItem("@firstTime");
-      const firstTime = await AsyncStorage.getItem("firstTime");
-      if (value === null && firstTime === null) {
-        await AsyncStorage.setItem("@firstTime", "true");
-        await AsyncStorage.setItem("firstTime", "false");
-      }
-    } catch (error) {
-      console.error("Error reading or setting flag in AsyncStorage:", error);
-    }
-  }
-
-  console.log('isFirstTime', isFirstTime)
-
   useEffect(() => {
-    checkFirstTime();
-  }, [])
-
-  useEffect(()=>{
     if(loaded){
       SplashScreen.hideAsync()
     }
   }, [loaded])
+
+  useEffect(() => {
+    // Check if the user has onboarded before
+    const getFirstTime = async () => {
+      // await AsyncStorage.removeItem('hasOnboarded')
+
+
+      AsyncStorage.getItem('hasOnboarded')
+      .then(value => {
+        // If the user has onboarded, set isOnboarded to true
+        if (value === 'true') {
+          setIsOnboarded(true);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+    const val = await AsyncStorage.getItem('hasOnboarded')
+
+  }
+
+    getFirstTime()
+  }, []);
+
+
   return (
     <>
-      {/* Keep the splash screen open until the assets have loaded. In the future, we should just support async font loading with a native version of font-display. */}
-      {loaded && !isFirstTime && <Onboard setIsFirstTime={setIsFirstTime} />}
-      {loaded  && isFirstTime && <RootLayoutNav />}
+      {isOnboarded ? (
+        <RootLayoutNav />
+      ) : (
+        <Onboard setIsFirstTime={setIsOnboarded}  />
+      )}
       <StatusBar style={Platform.OS === "ios" ? "light" : "auto"} />
     </>
   );
 }
+
+
 
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
