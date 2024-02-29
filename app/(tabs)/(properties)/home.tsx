@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, ScrollView, FlatList, Image, TouchableOpacity, StyleSheet } from 'react-native';
-import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesome, Ionicons } from '@expo/vector-icons';
 import SearchAndFilter from '../../../components/Molecules/Topics/SearchAndFilter';
 import { useTheme } from "@rneui/themed";
 import { useState } from "react";
@@ -9,6 +9,7 @@ import Animated, { withTiming } from 'react-native-reanimated';
 import { useSharedValue, withSpring, useAnimatedStyle, useAnimatedProps } from 'react-native-reanimated';
 import { transform } from 'lodash';
 import { images } from '../../../data';
+import PriceCard from '../../../components/Molecules/Cards/PriceCard';
 
 // Sample data for the cards
 const miniCardsData = [
@@ -62,11 +63,11 @@ const Swarms = () => {
         keyExtractor={item => item.title}
         renderItem={({ item }) => (
           <View  style={styles.imageCard}>
-            <Image source={{uri: item.imgUrl}} style={{ width: 140, height: 100, borderRadius: 10, marginTop: -45 }} />
+            <Image source={{uri: item.imgUrl}} style={{ width: 140, height: 100, borderRadius: 10, marginTop: -40 }} />
             <TouchableOpacity style={{ position: 'absolute', top: 5, right: 5 }}>
               <FontAwesome name="heart" size={16} color="red" />
             </TouchableOpacity>
-            <Text>{item.title}</Text>
+            <PriceCard images={images} title={item.title} />
           </View>
         )}
       />
@@ -79,11 +80,12 @@ const Swarms = () => {
         keyExtractor={item => item.title}
         renderItem={({ item }) => (
           <View style={styles.imageCard}>
-            <Image source={{uri: item.imgUrl}} style={{ width: 140, height: 100, borderRadius: 10, marginTop: -45 }}/>
+            <Image source={{uri: item.imgUrl}} style={{ width: 140, height: 100, borderRadius: 10, marginTop: -40 }}/>
             <TouchableOpacity style={{ position: 'absolute', top: 5, right: 5 }}>
               <FontAwesome name="heart" size={16} color="red" />
             </TouchableOpacity>
-            <Text>{item.title}</Text>
+            <PriceCard title={item.title} />
+
           </View>
         )}
       />
@@ -112,8 +114,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 15,
-    backgroundColor: 'white'
-
+    backgroundColor: 'white',
+    paddingBottom: 20
   },
 
   box: {
@@ -175,7 +177,12 @@ const styles = StyleSheet.create({
       borderRadius: 10,
       justifyContent: 'flex-start',
       alignItems: 'center',
+    },
+    textIcon: {
+      flexDirection: 'row',
+      justifyContent: 'flex-start'
     }
+
   
 
 })
