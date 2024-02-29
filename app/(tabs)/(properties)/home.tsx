@@ -49,8 +49,8 @@ const Swarms = () => {
       <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
         {miniCardsData.map(card => (
           <View style={styles.miniCardsData}  key={card.id}>
-            <FontAwesome name={card.icon} size={24} />
-            <Text style={{padding: 5}}>{card.text}</Text>
+            <FontAwesome color={'white'} name={card.icon} size={24} />
+            <Text  style={styles.text}>{card.text}</Text>
           </View>
         ))}
       </View>
@@ -62,7 +62,7 @@ const Swarms = () => {
         keyExtractor={item => item.title}
         renderItem={({ item }) => (
           <View  style={styles.imageCard}>
-            <Image source={{uri: item.imgUrl}} style={{ width: 140, height: 150, borderRadius: 10 }} />
+            <Image source={{uri: item.imgUrl}} style={{ width: 140, height: 100, borderRadius: 10, marginTop: -45 }} />
             <TouchableOpacity style={{ position: 'absolute', top: 5, right: 5 }}>
               <FontAwesome name="heart" size={16} color="red" />
             </TouchableOpacity>
@@ -79,7 +79,7 @@ const Swarms = () => {
         keyExtractor={item => item.title}
         renderItem={({ item }) => (
           <View style={styles.imageCard}>
-            <Image source={{uri: item.imgUrl}} style={{ width: 140, height: 150, borderRadius: 10 }} />
+            <Image source={{uri: item.imgUrl}} style={{ width: 140, height: 100, borderRadius: 10, marginTop: -45 }}/>
             <TouchableOpacity style={{ position: 'absolute', top: 5, right: 5 }}>
               <FontAwesome name="heart" size={16} color="red" />
             </TouchableOpacity>
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
   
   container: {
     flex: 1,
-    padding: 4,
+    padding: 15,
     backgroundColor: 'white'
 
   },
@@ -128,13 +128,23 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   miniCardsData: {
-    width: 120,
+    width: 110,
     height: 40,
     flexDirection: 'row',
     borderWidth: 2,
     borderRadius: 10,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: '#6CB4EE',
+    shadowRadius: 15,
+    shadowOffset: {width: 15, height: 15},
+    shadowOpacity: 5
+
+  },
+  text: {
+    color: 'white',
+    padding: 5
+
   },
   headerText: {
     fontSize: 20,
@@ -146,18 +156,22 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     width: 140,
     height: 170,
-    borderWidth: 2,
+    borderWidth: 1,
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 10
+    padding: 10,
+    shadowRadius: 15,
+    shadowOffset: {width: 15, height: 15},
+    shadowOpacity: 5
+    
   },
   recommendedFor: {
       margin: 10,
       flexDirection: 'row',
-      width: 370,
+      width: 340,
       height: 130,
-      borderWidth: 2,
+      borderWidth: 1,
       borderRadius: 10,
       justifyContent: 'flex-start',
       alignItems: 'center',
