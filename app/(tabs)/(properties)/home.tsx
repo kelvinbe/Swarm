@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ScrollView, FlatList, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, FlatList, Image, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
 import SearchAndFilter from '../../../components/Molecules/Topics/SearchAndFilter';
 import { useTheme } from "@rneui/themed";
@@ -18,6 +18,7 @@ const miniCardsData = [
   { id: '3', icon: 'sellsy', text: 'Sell' },
 ];
 
+const { width } = Dimensions.get('window');
 
 
 
@@ -26,6 +27,7 @@ const Swarms = () => {
   const { theme } = useTheme();
   const [search, setSearch] = useState<string>("");
   const [isVisible, setIsVisible] = useState<boolean>(false);
+
 
   const r = useSharedValue(20)
 
@@ -203,7 +205,7 @@ const styles = StyleSheet.create({
   recommendedFor: {
       margin: 10,
       flexDirection: 'row',
-      width: 340,
+      width: width - 50, // Adjust the value as needed
       height: 130,
       borderWidth: 1,
       borderRadius: 10,
