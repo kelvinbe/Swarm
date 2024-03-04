@@ -11,7 +11,7 @@ const PriceCard = ({images,title}) => {
 
             </View>
             <View style={styles.textIcon}>
-            <Ionicons name='location' size={16} />
+            <Ionicons style={{marginLeft: -4}} name='location' size={16} />
             <Text>California Bay</Text>  
             </View>
             <View>
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'center',
-        marginBottom: 3
+        marginBottom: 3,
       }
   
     

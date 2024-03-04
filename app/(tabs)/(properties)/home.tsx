@@ -29,21 +29,83 @@ const Swarms = () => {
 
   const r = useSharedValue(20)
 
-
   const handlePress = () => {
     r.value += 10;
   };
 
-
-
   const animatedProps = useAnimatedProps(() => ({
     r: withTiming(r.value)
-  }))
+  }));
 
-  
+  const renderListItem = ({ item, index }) => {
+    if (index === 0) {
+      // Render "Popular Near You" section
+      return (
+        <>
+          <Text style={styles.headerText}>Popular Near You</Text>
+          <FlatList
+            horizontal
+            data={item.data}
+            keyExtractor={(item) => item.title}
+            renderItem={({ item }) => (
+              <View style={styles.imageCard}>
+                <Image source={{ uri: item.imgUrl }} style={{ width: 140, height: 100, borderRadius: 10, marginTop: -40 }} />
+                <TouchableOpacity style={{ position: 'absolute', top: 5, right: 5 }}>
+                  <FontAwesome name="heart" size={16} color="red" />
+                </TouchableOpacity>
+                <PriceCard images={item.data} title={item.title} />
+              </View>
+            )}
+          />
+        </>
+      );
+    } else if (index === 1) {
+      // Render "Curated For You" section
+      return (
+        <>
+          <Text style={styles.headerText}>Curated For You</Text>
+          <FlatList
+            horizontal
+            data={item.data}
+            keyExtractor={(item) => item.title}
+            renderItem={({ item }) => (
+              <View style={styles.imageCard}>
+                <Image source={{ uri: item.imgUrl }} style={{ width: 140, height: 100, borderRadius: 10, marginTop: -40 }} />
+                <TouchableOpacity style={{ position: 'absolute', top: 5, right: 5 }}>
+                  <FontAwesome name="heart" size={16} color="red" />
+                </TouchableOpacity>
+                <PriceCard title={item.title} />
+              </View>
+            )}
+          />
+        </>
+      );
+    } else {
+      // Render "Recommended For You" section
+      return (
+        <>
+        <Text style={styles.headerText}>Recommended For You</Text>
+        <FlatList
+          
+          data={images}
+          keyExtractor={item => item.title}
+          renderItem={({ item }) => (
+            <View style={styles.recommendedFor}>
+              <Image source={{uri: item.imgUrl}} style={{ width: 140, height: 125, borderRadius: 10 }} />
+              <Text>{item.title}</Text>
+            </View>
+          )}
+        />
+        </>
+      );
+    }
+  };
+
   return (
-    <ScrollView style={styles.container}>
-      <View>
+      <View 
+        style={styles.containerFull} 
+      >
+        <View>
         <SearchAndFilter searchVisible filterVisible />
       </View>
 
@@ -56,64 +118,36 @@ const Swarms = () => {
         ))}
       </View>
 
-      <Text style={styles.headerText} >Popular Near You</Text>
-      <FlatList
-        horizontal
-        data={images}
-        keyExtractor={item => item.title}
-        renderItem={({ item }) => (
-          <View  style={styles.imageCard}>
-            <Image source={{uri: item.imgUrl}} style={{ width: 140, height: 100, borderRadius: 10, marginTop: -40 }} />
-            <TouchableOpacity style={{ position: 'absolute', top: 5, right: 5 }}>
-              <FontAwesome name="heart" size={16} color="red" />
-            </TouchableOpacity>
-            <PriceCard images={images} title={item.title} />
-          </View>
-        )}
-      />
+    <ScrollView>
 
-      {/* Curated For You */}
-      <Text style={styles.headerText}>Curated For You</Text>
-      <FlatList
-        horizontal
-        data={images}
-        keyExtractor={item => item.title}
-        renderItem={({ item }) => (
-          <View style={styles.imageCard}>
-            <Image source={{uri: item.imgUrl}} style={{ width: 140, height: 100, borderRadius: 10, marginTop: -40 }}/>
-            <TouchableOpacity style={{ position: 'absolute', top: 5, right: 5 }}>
-              <FontAwesome name="heart" size={16} color="red" />
-            </TouchableOpacity>
-            <PriceCard title={item.title} />
-
-          </View>
-        )}
-      />
-
-      {/* Recommended For You */}
-      <Text style={styles.headerText}>Recommended For You</Text>
-      <FlatList
-        data={images}
-        keyExtractor={item => item.title}
-        renderItem={({ item }) => (
-          <View style={styles.recommendedFor}>
-            <Image source={{uri: item.imgUrl}} style={{ width: 140, height: 125, borderRadius: 10 }} />
-            <Text>{item.title}</Text>
-          </View>
-        )}
-      />
+    <FlatList
+      data={[
+        { type: 'popular', data: images },
+        { type: 'curated', data: images },
+        { type: 'recommended', data: images },
+      ]}
+      keyExtractor={(item, index) => item.type + index.toString()}
+      renderItem={renderListItem}
+      contentContainerStyle={styles.container}
+    />
     </ScrollView>
-  )
-  
+    </View>
+  );
 };
-
-export default Swarms;
+export default Swarms
 
 const styles = StyleSheet.create({
+
+  containerFull: {
+    flex: 1,
+    padding: 15,
+    backgroundColor: 'white',
+    paddingBottom: 20
+  },
+
   
   container: {
     flex: 1,
-    padding: 15,
     backgroundColor: 'white',
     paddingBottom: 20
   },
