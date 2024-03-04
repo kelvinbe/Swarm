@@ -102,13 +102,11 @@ const Swarms = () => {
   };
 
   return (
-      <View 
-        style={styles.containerFull} 
-      >
-        <View>
+    <View style={styles.containerFull}>
+      <View>
         <SearchAndFilter searchVisible filterVisible />
       </View>
-
+    
       <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
         {miniCardsData.map(card => (
           <View style={styles.miniCardsData}  key={card.id}>
@@ -117,24 +115,24 @@ const Swarms = () => {
           </View>
         ))}
       </View>
-
-    <ScrollView>
-
-    <FlatList
-      data={[
-        { type: 'popular', data: images },
-        { type: 'curated', data: images },
-        { type: 'recommended', data: images },
-      ]}
-      keyExtractor={(item, index) => item.type + index.toString()}
-      renderItem={renderListItem}
-      contentContainerStyle={styles.container}
-    />
-    </ScrollView>
+      <ScrollView>
+      <FlatList
+        data={[
+          { type: 'popular', data: images },
+          { type: 'curated', data: images },
+          { type: 'recommended', data: images },
+        ]}
+        keyExtractor={(item, index) => item.type + index.toString()}
+        renderItem={renderListItem}
+        contentContainerStyle={styles.container}
+      />
+      </ScrollView>
     </View>
   );
 };
-export default Swarms
+
+export default Swarms;
+
 
 const styles = StyleSheet.create({
 
